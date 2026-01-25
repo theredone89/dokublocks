@@ -2,9 +2,7 @@ class Renderer {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.cellSize = 50; // pixels
     this.gridSize = 9;
-    this.gridOffset = { x: 50, y: 50 };
     
     // Colors
     this.colors = {
@@ -16,6 +14,57 @@ class Renderer {
       highlight: '#e94560',
       ghost: '#4ecca3'
     };
+    
+    // Initialize sizes based on screen
+    this.resize();
+  }
+
+  resize() {
+    // Calculate available width (minimal padding on mobile)
+    const isMobile = window.innerWidth <= 768;
+    this.isMobile = isMobile;
+    const padding = isMobile ? 10 : 40;
+    const maxWidth = Math.min(window.innerWidth - padding, 600);
+    
+    // Calculate cell size to fit the grid with minimal offsets
+    // Grid needs: offset + (9 cells * cellSize) + offset
+    const sideOffset = isMobile ? 10 : 50;
+    this.cellSize = Math.floor((maxWidth - sideOffset * 2) / 9);
+    
+    // Minimum cell size for playability
+    this.cellSize = Math.max(this.cellSize, 30);
+    // Maximum cell size for desktop
+    this.cellSize = Math.min(this.cellSize, 50);
+    
+    // Calculate canvas dimensions
+    const gridWidth = this.cellSize * 9;
+    this.gridOffset = { 
+      x: Math.floor((maxWidth - gridWidth) / 2), 
+      y: isMobile ? 10 : 30 
+    };
+    
+    // Hand area needs space below grid
+    // Calculate hand cell size based on available width for 3 pieces with spacing
+    const handMargin = isMobile ? 10 : 20; // Margin on each side
+    const spacingBetween = isMobile ? 10 : 20;
+    const availableHandWidth = maxWidth - (handMargin * 2) - (spacingBetween * 2);
+    // Each piece slot needs to fit max 5 blocks, divide available width by 3 pieces
+    const maxHandCellFromWidth = Math.floor(availableHandWidth / 3 / 5);
+    
+    // Hand cell size - bigger on mobile for easier touch, but constrained by width
+    this.handCellSize = isMobile 
+      ? Math.min(Math.floor(this.cellSize * 0.7), maxHandCellFromWidth)
+      : Math.floor(this.cellSize * 0.6);
+    
+    // Ensure minimum size for usability
+    this.handCellSize = Math.max(this.handCellSize, 20);
+    
+    // Hand height must fit 5 blocks + some padding
+    const handHeight = (this.handCellSize * 5) + (isMobile ? 30 : 50);
+    
+    // Set canvas size
+    this.canvas.width = maxWidth;
+    this.canvas.height = this.gridOffset.y + (this.cellSize * 9) + handHeight;
   }
 
   drawGrid(gridData) {
@@ -91,20 +140,33 @@ class Renderer {
   }
 
   drawHand(pieces) {
-    const handY = this.gridOffset.y + 10 * this.cellSize;
-    const handCellSize = 30;
-    const spacing = 150;
+    const handY = this.gridOffset.y + (9.5 * this.cellSize);
+    const handCellSize = this.handCellSize || 30;
+    
+    // Calculate layout with margins
+    const handMargin = this.isMobile ? 10 : 20;
+    const spacingBetween = this.isMobile ? 10 : 20;
+    const pieceSlotWidth = handCellSize * 5; // Max piece width (5 blocks)
+    const totalWidth = (pieceSlotWidth * 3) + (spacingBetween * 2);
+    
+    // Center the hand area with margins
+    const startX = (this.canvas.width - totalWidth) / 2;
     
     pieces.forEach((piece, index) => {
       if (!piece) return; // Piece already used
       
-      const handX = this.gridOffset.x + index * spacing;
+      // Calculate slot position with spacing
+      const slotX = startX + index * (pieceSlotWidth + spacingBetween);
+      
+      // Center piece within its slot
+      const pieceWidth = piece.width * handCellSize;
+      const offsetX = (pieceSlotWidth - pieceWidth) / 2;
       
       // Draw piece preview
       for (let row = 0; row < piece.shape.length; row++) {
         for (let col = 0; col < piece.shape[row].length; col++) {
           if (piece.shape[row][col] === 1) {
-            const x = handX + col * handCellSize;
+            const x = slotX + offsetX + col * handCellSize;
             const y = handY + row * handCellSize;
             
             // Draw block
@@ -192,7 +254,7 @@ class Renderer {
   drawDraggingPiece(piece, mouseX, mouseY) {
     if (!piece) return;
     
-    const cellSize = 30;
+    const cellSize = this.handCellSize || 30;
     // Center the piece on the cursor
     const offsetX = (piece.width * cellSize) / 2;
     const offsetY = (piece.height * cellSize) / 2;

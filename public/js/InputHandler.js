@@ -11,6 +11,17 @@ class InputHandler {
     this.setupTouchListeners();
   }
 
+  // Convert client coordinates to canvas coordinates (handles CSS scaling)
+  getCanvasCoordinates(clientX, clientY) {
+    const rect = this.canvas.getBoundingClientRect();
+    const scaleX = this.canvas.width / rect.width;
+    const scaleY = this.canvas.height / rect.height;
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY
+    };
+  }
+
   setupMouseListeners() {
     this.canvas.addEventListener('mousedown', (e) => this.handleMouseDown(e));
     this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
@@ -35,9 +46,7 @@ class InputHandler {
   }
 
   handleMouseDown(e) {
-    const rect = this.canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const { x, y } = this.getCanvasCoordinates(e.clientX, e.clientY);
     
     const pieceIndex = this.getPieceAtPosition(x, y);
     
@@ -50,9 +59,9 @@ class InputHandler {
   }
 
   handleMouseMove(e) {
-    const rect = this.canvas.getBoundingClientRect();
-    this.mousePos.x = e.clientX - rect.left;
-    this.mousePos.y = e.clientY - rect.top;
+    const { x, y } = this.getCanvasCoordinates(e.clientX, e.clientY);
+    this.mousePos.x = x;
+    this.mousePos.y = y;
     
     if (this.isDragging && this.selectedPiece) {
       this.updatePreview();
@@ -64,9 +73,7 @@ class InputHandler {
 
   handleMouseUp(e) {
     if (this.isDragging && this.selectedPiece) {
-      const rect = this.canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const { x, y } = this.getCanvasCoordinates(e.clientX, e.clientY);
       
       const gridPos = this.getGridPosition(x, y, this.selectedPiece);
       
@@ -83,9 +90,7 @@ class InputHandler {
 
   handleTouchStart(e) {
     const touch = e.touches[0];
-    const rect = this.canvas.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
+    const { x, y } = this.getCanvasCoordinates(touch.clientX, touch.clientY);
     
     const pieceIndex = this.getPieceAtPosition(x, y);
     
@@ -101,9 +106,9 @@ class InputHandler {
     if (!this.isDragging) return;
     
     const touch = e.touches[0];
-    const rect = this.canvas.getBoundingClientRect();
-    this.mousePos.x = touch.clientX - rect.left;
-    this.mousePos.y = touch.clientY - rect.top;
+    const { x, y } = this.getCanvasCoordinates(touch.clientX, touch.clientY);
+    this.mousePos.x = x;
+    this.mousePos.y = y;
     
     this.updatePreview();
   }
@@ -111,9 +116,7 @@ class InputHandler {
   handleTouchEnd(e) {
     if (this.isDragging && this.selectedPiece) {
       const touch = e.changedTouches[0];
-      const rect = this.canvas.getBoundingClientRect();
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
+      const { x, y } = this.getCanvasCoordinates(touch.clientX, touch.clientY);
       
       const gridPos = this.getGridPosition(x, y, this.selectedPiece);
       
@@ -129,29 +132,35 @@ class InputHandler {
   }
 
   getPieceAtPosition(x, y) {
-    const handY = this.game.renderer.gridOffset.y + 10 * this.game.renderer.cellSize;
-    const handCellSize = 30;
-    const spacing = 150;
+    const handY = this.game.renderer.gridOffset.y + (9.5 * this.game.renderer.cellSize);
+    const handCellSize = this.game.renderer.handCellSize || 30;
+    
+    // Match the layout calculation from drawHand
+    const pieceSlotWidth = handCellSize * 5;
+    const spacingBetween = this.game.renderer.isMobile ? 10 : 20;
+    const totalWidth = (pieceSlotWidth * 3) + (spacingBetween * 2);
+    const startX = (this.game.renderer.canvas.width - totalWidth) / 2;
+    
+    // Add padding around pieces for easier touch on mobile
+    const touchPadding = this.game.renderer.isMobile ? 15 : 5;
     
     for (let i = 0; i < this.game.hand.length; i++) {
       const piece = this.game.hand[i];
       if (!piece) continue;
       
-      const handX = this.game.renderer.gridOffset.x + i * spacing;
+      const slotX = startX + i * (pieceSlotWidth + spacingBetween);
+      const pieceWidth = piece.width * handCellSize;
+      const pieceHeight = piece.height * handCellSize;
+      const offsetX = (pieceSlotWidth - pieceWidth) / 2;
       
-      // Check each block of the piece
-      for (let row = 0; row < piece.shape.length; row++) {
-        for (let col = 0; col < piece.shape[row].length; col++) {
-          if (piece.shape[row][col] === 1) {
-            const blockX = handX + col * handCellSize;
-            const blockY = handY + row * handCellSize;
-            
-            if (x >= blockX && x <= blockX + handCellSize &&
-                y >= blockY && y <= blockY + handCellSize) {
-              return i;
-            }
-          }
-        }
+      // Check bounding box of the entire piece with padding for easier touch
+      const pieceLeft = slotX + offsetX - touchPadding;
+      const pieceRight = slotX + offsetX + pieceWidth + touchPadding;
+      const pieceTop = handY - touchPadding;
+      const pieceBottom = handY + pieceHeight + touchPadding;
+      
+      if (x >= pieceLeft && x <= pieceRight && y >= pieceTop && y <= pieceBottom) {
+        return i;
       }
     }
     
@@ -164,7 +173,7 @@ class InputHandler {
     let adjustedY = canvasY;
     
     if (piece) {
-      const dragCellSize = 30; // Same as in drawDraggingPiece
+      const dragCellSize = this.game.renderer.handCellSize || 30;
       const offsetX = (piece.width * dragCellSize) / 2;
       const offsetY = (piece.height * dragCellSize) / 2;
       // Adjust to get the top-left corner of where the piece would be placed

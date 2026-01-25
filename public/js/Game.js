@@ -38,6 +38,19 @@ class Game {
     this.startAnimationLoop();
     this.loadLeaderboard();
     this.setupEventListeners();
+    this.setupResizeListener();
+  }
+
+  setupResizeListener() {
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      // Debounce resize events
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        this.renderer.resize();
+        this.render();
+      }, 100);
+    });
   }
 
   init() {
