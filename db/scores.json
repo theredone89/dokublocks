@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1769363707720,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-01-25T17:55:07.720Z"
+  },
+  {
+    "id": 1769363780898,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-01-25T17:56:20.898Z"
+  },
+  {
+    "id": 1769363788045,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-01-25T17:56:28.045Z"
+  },
+  {
+    "id": 1769363855660,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-01-25T17:57:35.660Z"
+  },
+  {
+    "id": 1769363863818,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-01-25T17:57:43.818Z"
+  },
+  {
+    "id": 1769366945191,
+    "username": "Red",
+    "score": 1340,
+    "timestamp": "2026-01-25T18:49:05.191Z"
+  },
+  {
+    "id": 1769367179815,
+    "username": "Red2",
+    "score": 1530,
+    "timestamp": "2026-01-25T18:52:59.815Z"
+  }
+]

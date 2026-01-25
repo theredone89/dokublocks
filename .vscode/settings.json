@@ -1,0 +1,10 @@
+{
+  "chat.tools.terminal.autoApprove": {
+    "npm init": true,
+    "npm install": true,
+    "/^mkdir -p public/css public/js src db$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
+}

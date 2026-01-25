@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlockLogic - Blockudoku Game</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>BlockLogic</h1>
+      <div class="score-display">
+        <div class="score-item">
+          <span class="score-label">Score:</span>
+          <span id="current-score" class="score-value">0</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">High Score:</span>
+          <span id="high-score" class="score-value">0</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="game-area">
+        <canvas id="game-canvas" width="600" height="750"></canvas>
+        <button id="restart-btn" class="game-button">Restart Game</button>
+      </div>
+
+      <aside id="leaderboard-container">
+        <h2>Leaderboard</h2>
+        <div id="leaderboard-loading" class="loading">Loading...</div>
+        <ol id="leaderboard-list" class="hidden"></ol>
+        <button id="refresh-leaderboard-btn" class="game-button">Refresh</button>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Game Over Modal -->
+  <div id="game-over-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Game Over!</h2>
+      <p class="final-score">Score: <span id="final-score">0</span></p>
+      <p class="high-score-text">High Score: <span id="modal-high-score">0</span></p>
+      
+      <div class="username-input">
+        <label for="username">Enter Name:</label>
+        <input type="text" id="username" maxlength="20" placeholder="Player">
+      </div>
+      
+      <div class="modal-buttons">
+        <button id="submit-score-btn" class="game-button">Submit Score</button>
+        <button id="play-again-btn" class="game-button">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/Grid.js"></script>
+  <script src="js/Pieces.js"></script>
+  <script src="js/ScoreManager.js"></script>
+  <script src="js/Renderer.js"></script>
+  <script src="js/InputHandler.js"></script>
+  <script src="js/Game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
