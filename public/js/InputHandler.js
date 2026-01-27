@@ -6,6 +6,7 @@ class InputHandler {
     this.selectedPieceIndex = null;
     this.isDragging = false;
     this.mousePos = { x: 0, y: 0 };
+    this.isTouch = false; // Track if current interaction is touch
     
     this.setupMouseListeners();
     this.setupTouchListeners();
@@ -54,6 +55,7 @@ class InputHandler {
       this.selectedPiece = this.game.hand[pieceIndex];
       this.selectedPieceIndex = pieceIndex;
       this.isDragging = true;
+      this.isTouch = false; // This is a mouse interaction
       this.mousePos = { x, y };
     }
   }
@@ -85,6 +87,7 @@ class InputHandler {
     this.selectedPiece = null;
     this.selectedPieceIndex = null;
     this.isDragging = false;
+    this.isTouch = false;
     this.game.render();
   }
 
@@ -98,6 +101,7 @@ class InputHandler {
       this.selectedPiece = this.game.hand[pieceIndex];
       this.selectedPieceIndex = pieceIndex;
       this.isDragging = true;
+      this.isTouch = true; // This is a touch interaction
       this.mousePos = { x, y };
     }
   }
@@ -128,6 +132,7 @@ class InputHandler {
     this.selectedPiece = null;
     this.selectedPieceIndex = null;
     this.isDragging = false;
+    this.isTouch = false;
     this.game.render();
   }
 
@@ -168,14 +173,15 @@ class InputHandler {
   }
 
   getGridPosition(canvasX, canvasY, piece = null) {
-    // If we have a piece, adjust for its center offset (matching drawDraggingPiece)
+    // If we have a piece, adjust for its offset (matching drawDraggingPiece)
     let adjustedX = canvasX;
     let adjustedY = canvasY;
     
     if (piece) {
-      const dragCellSize = this.game.renderer.handCellSize || 30;
-      const offsetX = (piece.width * dragCellSize) / 2;
-      const offsetY = (piece.height * dragCellSize) / 2;
+      const gridCellSize = this.game.renderer.cellSize;
+      const offsetX = (piece.width * gridCellSize) / 2;
+      // On touch, anchor from bottom; on mouse, center vertically
+      const offsetY = this.isTouch ? (piece.height * gridCellSize) : (piece.height * gridCellSize) / 2;
       // Adjust to get the top-left corner of where the piece would be placed
       adjustedX = canvasX - offsetX;
       adjustedY = canvasY - offsetY;
@@ -233,8 +239,8 @@ class InputHandler {
       }
     }
     
-    // Draw the piece following the cursor
-    this.game.renderer.drawDraggingPiece(this.selectedPiece, this.mousePos.x, this.mousePos.y);
+    // Draw the piece following the cursor (pass isTouch flag)
+    this.game.renderer.drawDraggingPiece(this.selectedPiece, this.mousePos.x, this.mousePos.y, this.isTouch);
   }
 
   calculatePotentialClears(piece, startX, startY) {

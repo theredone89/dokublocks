@@ -251,13 +251,14 @@ class Renderer {
     this.ctx.restore();
   }
 
-  drawDraggingPiece(piece, mouseX, mouseY) {
+  drawDraggingPiece(piece, mouseX, mouseY, isTouch = false) {
     if (!piece) return;
     
     const cellSize = this.handCellSize || 30;
-    // Center the piece on the cursor
+    // Center the piece horizontally on the cursor
     const offsetX = (piece.width * cellSize) / 2;
-    const offsetY = (piece.height * cellSize) / 2;
+    // On touch, anchor from bottom; on mouse, center vertically
+    const offsetY = isTouch ? (piece.height * cellSize) : (piece.height * cellSize) / 2;
     
     this.ctx.save();
     this.ctx.globalAlpha = 0.8;
