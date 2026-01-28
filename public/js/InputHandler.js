@@ -187,10 +187,10 @@ class InputHandler {
       adjustedY = canvasY - offsetY;
     }
     
-    const gridX = Math.floor(
+    const gridX = Math.round(
       (adjustedX - this.game.renderer.gridOffset.x) / this.game.renderer.cellSize
     );
-    const gridY = Math.floor(
+    const gridY = Math.round(
       (adjustedY - this.game.renderer.gridOffset.y) / this.game.renderer.cellSize
     );
     

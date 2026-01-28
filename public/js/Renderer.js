@@ -4,19 +4,35 @@ class Renderer {
     this.ctx = canvas.getContext('2d');
     this.gridSize = 9;
     
-    // Colors
-    this.colors = {
+    // Color schemes
+    this.darkColors = {
       background: '#1a1a2e',
       gridLine: '#444',
       subgridLine: '#888',
       emptyCell: '#16213e',
       filledCell: '#0f3460',
-      highlight: '#e94560',
-      ghost: '#4ecca3'
+      highlight: '#4ecca3',
+      ghost: '#ff9500'
     };
+    
+    this.lightColors = {
+      background: '#f5f5f5',
+      gridLine: '#ccc',
+      subgridLine: '#888',
+      emptyCell: '#ffffff',
+      filledCell: '#64b5f6',
+      highlight: '#4caf50',
+      ghost: '#ff9800'
+    };
+    
+    this.colors = this.darkColors;
     
     // Initialize sizes based on screen
     this.resize();
+  }
+
+  setTheme(isLight) {
+    this.colors = isLight ? this.lightColors : this.darkColors;
   }
 
   resize() {
@@ -254,7 +270,7 @@ class Renderer {
   drawDraggingPiece(piece, mouseX, mouseY, isTouch = false) {
     if (!piece) return;
     
-    const cellSize = this.handCellSize || 30;
+    const cellSize = this.cellSize; // Use grid cell size for proper alignment
     // Center the piece horizontally on the cursor
     const offsetX = (piece.width * cellSize) / 2;
     // On touch, anchor from bottom; on mouse, center vertically

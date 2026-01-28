@@ -82,14 +82,55 @@ class Game {
     
     if (restartBtn) {
       restartBtn.addEventListener('click', () => {
-        if (confirm('Are you sure you want to restart? Your current progress will be lost.')) {
-          this.init();
-        }
+        this.showConfirmDialog(
+          'Are you sure you want to restart? Your current progress will be lost.',
+          () => this.init()
+        );
       });
     }
     
     if (refreshBtn) {
       refreshBtn.addEventListener('click', () => this.loadLeaderboard());
+    }
+    
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      // Load saved theme preference
+      const savedTheme = localStorage.getItem('blocklogic-theme');
+      const themeColorMeta = document.getElementById('theme-color-meta');
+      const appleStatusBar = document.getElementById('apple-status-bar');
+      
+      if (savedTheme === 'light') {
+        themeToggle.checked = true;
+        this.renderer.setTheme(true);
+        document.body.classList.add('light-theme');
+        if (themeColorMeta) {
+          themeColorMeta.setAttribute('content', '#e3f2fd');
+        }
+        if (appleStatusBar) {
+          appleStatusBar.setAttribute('content', 'default');
+        }
+      }
+      
+      themeToggle.addEventListener('change', (e) => {
+        const isLight = e.target.checked;
+        this.renderer.setTheme(isLight);
+        document.body.classList.toggle('light-theme', isLight);
+        localStorage.setItem('blocklogic-theme', isLight ? 'light' : 'dark');
+        
+        // Update theme-color meta tag for tab tinting
+        if (themeColorMeta) {
+          themeColorMeta.setAttribute('content', isLight ? '#e3f2fd' : '#1a1a2e');
+        }
+        
+        // Update Apple status bar style
+        if (appleStatusBar) {
+          appleStatusBar.setAttribute('content', isLight ? 'default' : 'black-translucent');
+        }
+        
+        this.render();
+      });
     }
     
     const usernameInput = document.getElementById('username');
@@ -246,13 +287,70 @@ class Game {
     }
   }
 
+  showDialog(message, onClose = null) {
+    const modal = document.getElementById('dialog-modal');
+    const messageEl = document.getElementById('dialog-message');
+    const okBtn = document.getElementById('dialog-ok-btn');
+    
+    if (modal && messageEl) {
+      messageEl.textContent = message;
+      modal.classList.remove('hidden');
+      
+      // Set up one-time click handler
+      const closeDialog = () => {
+        modal.classList.add('hidden');
+        okBtn.removeEventListener('click', closeDialog);
+        // Execute callback if provided
+        if (onClose) {
+          onClose();
+        }
+      };
+      
+      okBtn.addEventListener('click', closeDialog);
+    }
+  }
+
+  showConfirmDialog(message, onConfirm, onCancel = null) {
+    const modal = document.getElementById('confirm-modal');
+    const messageEl = document.getElementById('confirm-message');
+    const yesBtn = document.getElementById('confirm-yes-btn');
+    const noBtn = document.getElementById('confirm-no-btn');
+    
+    if (modal && messageEl) {
+      messageEl.textContent = message;
+      modal.classList.remove('hidden');
+      
+      // Set up one-time click handlers
+      const handleYes = () => {
+        modal.classList.add('hidden');
+        yesBtn.removeEventListener('click', handleYes);
+        noBtn.removeEventListener('click', handleNo);
+        if (onConfirm) {
+          onConfirm();
+        }
+      };
+      
+      const handleNo = () => {
+        modal.classList.add('hidden');
+        yesBtn.removeEventListener('click', handleYes);
+        noBtn.removeEventListener('click', handleNo);
+        if (onCancel) {
+          onCancel();
+        }
+      };
+      
+      yesBtn.addEventListener('click', handleYes);
+      noBtn.addEventListener('click', handleNo);
+    }
+  }
+
   async submitScore() {
     const usernameInput = document.getElementById('username');
     const username = usernameInput ? usernameInput.value.trim() || 'Anonymous' : 'Anonymous';
     const score = this.scoreManager.getScore();
     
     if (username.length > 20) {
-      alert('Username must be 20 characters or less');
+      this.showDialog('Username must be 20 characters or less');
       return;
     }
     
@@ -270,13 +368,21 @@ class Game {
       }
       
       const data = await response.json();
-      alert(`Score submitted! Your rank: #${data.rank}`);
       
       await this.loadLeaderboard();
       
+      this.showDialog(`Score submitted! Your rank: #${data.rank}`, () => {
+        // Close game over modal and show leaderboard
+        this.hideGameOverModal();
+        const leaderboard = document.getElementById('leaderboard-container');
+        if (leaderboard) {
+          leaderboard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+      
     } catch (error) {
       console.error('Error submitting score:', error);
-      alert('Failed to submit score. Please try again.');
+      this.showDialog('Failed to submit score. Please try again.');
     }
   }
 
