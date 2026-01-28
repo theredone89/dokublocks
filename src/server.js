@@ -115,10 +115,7 @@ app.post('/api/score', async (req, res) => {
 });
 
 // Start server
-const HOST = process.env.PROD === 'true' ? '192.168.1.171' : 'localhost';
+const HOST = process.env.HOST || 'localhost';
 app.listen(PORT, HOST, () => {
   console.log(`BlockLogic server running on http://${HOST}:${PORT}`);
-  if (HOST === '192.168.1.171') {
-    console.log(`Server exposed to local network - access from other devices using your machine's IP`);
-  }
 });

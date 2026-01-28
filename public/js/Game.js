@@ -199,9 +199,14 @@ class Game {
     
     this.updateScoreDisplay();
     
-    setTimeout(() => {
+    // Check game over after animation completes (if there was a clear)
+    if (clearCount > 0) {
+      setTimeout(() => {
+        this.checkGameOver();
+      }, 450); // Slightly longer than animation duration
+    } else {
       this.checkGameOver();
-    }, 300);
+    }
     
     this.render();
     return true;
