@@ -2,8 +2,8 @@
   "name": "BlockLogic - Blockudoku Puzzle Game",
   "short_name": "BlockLogic",
   "description": "A captivating browser-based puzzle game combining Sudoku grids with Tetris-style block placement mechanics",
-  "start_url": "/public/index.html",
-  "scope": "/public/",
+  "start_url": "/dokublocks/public/index.html",
+  "scope": "/dokublocks/public/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#1a1a2e",
@@ -54,7 +54,7 @@
       "name": "Play Game",
       "short_name": "Play",
       "description": "Start a new BlockLogic game",
-      "url": "/public/index.html",
+      "url": "/dokublocks/public/index.html",
       "icons": [
         {
           "src": "/img/icon-96.png",
