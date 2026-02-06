@@ -26,6 +26,7 @@ class Game {
     this.scoreManager = new ScoreManager();
     this.renderer = new Renderer(canvas);
     this.pieceGenerator = new PieceGenerator();
+    this.backupManager = new ScoreBackupManager();
     
     this.hand = [];
     this.isGameOver = false;
@@ -39,6 +40,7 @@ class Game {
     this.loadLeaderboard();
     this.setupEventListeners();
     this.setupResizeListener();
+    this.setupSyncNotification();
   }
 
   setupResizeListener() {
@@ -50,6 +52,17 @@ class Game {
         this.renderer.resize();
         this.render();
       }, 100);
+    });
+  }
+
+  setupSyncNotification() {
+    // Listen for sync events from backup manager
+    this.backupManager.onSync((success, syncedCount) => {
+      if (success && syncedCount > 0) {
+        this.showDialog(`${syncedCount} score(s) synced to server successfully!`);
+        // Reload leaderboard to show newly synced scores
+        this.loadLeaderboard();
+      }
     });
   }
 
@@ -387,7 +400,22 @@ class Game {
       
     } catch (error) {
       console.error('Error submitting score:', error);
-      this.showDialog('Failed to submit score. Please try again.');
+      
+      // Fallback to localStorage backup
+      const backupSaved = this.backupManager.saveToBackup(username, score);
+      
+      if (backupSaved) {
+        const pendingCount = this.backupManager.getPendingCount();
+        this.showDialog(
+          `Server unavailable. Score saved locally (${pendingCount} pending).` +
+          ` It will sync when connection is restored.`,
+          () => {
+            this.hideGameOverModal();
+          }
+        );
+      } else {
+        this.showDialog('Failed to submit score. Please try again.');
+      }
     }
   }
 
@@ -411,14 +439,32 @@ class Game {
       const data = await response.json();
       
       if (data.success && data.data) {
-        this.renderLeaderboard(data.data);
+        // Use combined leaderboard (server + backup)
+        const combinedScores = this.backupManager.getCombinedLeaderboard(data.data);
+        this.renderLeaderboard(combinedScores);
       } else {
         throw new Error('Invalid response format');
       }
       
     } catch (error) {
       console.error('Error loading leaderboard:', error);
-      loading.textContent = 'Failed to load';
+      // Fall back to backup scores if server is unavailable
+      const backupScores = this.backupManager.getBackupScores();
+      if (backupScores.length > 0) {
+        this.renderLeaderboard(backupScores);
+        loading.classList.add('hidden');
+        list.classList.remove('hidden');
+        const pendingCount = this.backupManager.getPendingCount();
+        if (pendingCount > 0) {
+          const notice = document.createElement('li');
+          notice.textContent = `⚠️ ${pendingCount} score(s) pending sync to server`;
+          notice.style.textAlign = 'center';
+          notice.style.color = '#ff9800';
+          list.insertBefore(notice, list.firstChild);
+        }
+      } else {
+        loading.textContent = 'Failed to load';
+      }
     }
   }
 

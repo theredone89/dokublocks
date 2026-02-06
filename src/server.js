@@ -80,7 +80,17 @@ app.post('/api/score', async (req, res) => {
     }
     
     // Read existing scores
-    const scores = await readScores();
+    let scores = [];
+    try {
+      scores = await readScores();
+    } catch (error) {
+      console.error('Error reading scores file:', error);
+      return res.status(503).json({
+        success: false,
+        error: 'Database temporarily unavailable',
+        retryable: true
+      });
+    }
     
     // Create new score entry
     const newScore = {
@@ -94,7 +104,16 @@ app.post('/api/score', async (req, res) => {
     scores.push(newScore);
     
     // Save scores
-    await writeScores(scores);
+    try {
+      await writeScores(scores);
+    } catch (error) {
+      console.error('Error writing scores file:', error);
+      return res.status(503).json({
+        success: false,
+        error: 'Failed to save score to database',
+        retryable: true
+      });
+    }
     
     // Calculate rank
     const sortedScores = scores.sort((a, b) => b.score - a.score);
@@ -109,7 +128,8 @@ app.post('/api/score', async (req, res) => {
     console.error('Error submitting score:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to submit score'
+      error: 'Internal server error',
+      retryable: false
     });
   }
 });
