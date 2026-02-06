@@ -65,7 +65,7 @@
     }
   ],
   "share_target": {
-    "action": "/share",
+    "action": "https://theredone89.github.io/dokublocks/public/index.html",
     "method": "POST",
     "enctype": "application/x-www-form-urlencoded",
     "params": {
