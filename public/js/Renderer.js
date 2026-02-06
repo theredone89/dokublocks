@@ -7,12 +7,12 @@ class Renderer {
     // Color schemes
     this.darkColors = {
       background: '#1a1a2e',
-      gridLine: '#444',
-      subgridLine: '#888',
+      gridLine: '#677698',
+      subgridLine: '#829eb8',
       emptyCell: '#16213e',
-      filledCell: '#0f3460',
+      filledCell: '#123768', 
       highlight: '#4ecca3',
-      ghost: '#ff9500'
+      ghost: '#90caf9'
     };
     
     this.lightColors = {
