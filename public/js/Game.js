@@ -41,6 +41,7 @@ class Game {
     this.setupEventListeners();
     this.setupResizeListener();
     this.setupSyncNotification();
+    this.setupOfflineDetection();
   }
 
   setupResizeListener() {
@@ -64,6 +65,41 @@ class Game {
         this.loadLeaderboard();
       }
     });
+    
+    // Listen for online event to trigger sync
+    window.addEventListener('app-online', () => {
+      console.log('[Game] Connection restored, attempting to sync pending scores...');
+      this.backupManager.syncPendingScores();
+    });
+  }
+
+  setupOfflineDetection() {
+    const offlineBanner = document.getElementById('offline-banner');
+    const offlineText = document.getElementById('offline-text');
+    
+    if (!offlineBanner) return;
+    
+    // Set initial state
+    this.updateOfflineStatus(offlineBanner, offlineText);
+    
+    // Update on status changes
+    window.addEventListener('online', () => {
+      this.updateOfflineStatus(offlineBanner, offlineText);
+    });
+    
+    window.addEventListener('offline', () => {
+      this.updateOfflineStatus(offlineBanner, offlineText);
+    });
+  }
+
+  updateOfflineStatus(banner, text) {
+    if (navigator.onLine) {
+      banner.classList.add('hidden');
+      text.textContent = 'You are online';
+    } else {
+      banner.classList.remove('hidden');
+      text.textContent = 'You are offline - using local storage';
+    }
   }
 
   init() {

@@ -4,6 +4,37 @@
   padding: 0;
 }
 
+/* Offline Banner */
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #ff6b6b, #ff8e72);
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+  animation: slideDown 0.3s ease-out;
+}
+
+.offline-banner.hidden {
+  display: none;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 body {
   font-family: 'Arial', sans-serif;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -14,6 +45,7 @@ body {
   align-items: center;
   padding: 20px;
   transition: background 0.3s ease;
+  padding-top: 60px; /* Account for offline banner */
 }
 
 body.light-theme {
@@ -112,7 +144,22 @@ header {
   flex-wrap: wrap;
 }
 
+@media screen and (min-width: 768px){
+  body {
+    padding-top: 20px;
+  }
+
+  .header-top {
+    margin-top: 0;
+  }
+
+  .score-display {
+    margin-top: -80px;
+  }
+}
+
 .logo {
+  max-width: 300px;
   width: calc(60% - 2px);
   margin-left: 1px;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));

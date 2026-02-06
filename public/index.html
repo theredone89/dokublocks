@@ -7,12 +7,21 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" id="apple-status-bar">
   <meta name="apple-mobile-web-app-title" content="BlockLogic">
+  <meta name="description" content="A captivating puzzle game combining Sudoku grids with Tetris-style block placement mechanics">
   
   <title>BlockLogic - Blockudoku Game</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="img/icon-192.png">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
 </head>
 <body>
   <div class="container">
+    <!-- Offline Status Banner -->
+    <div id="offline-banner" class="offline-banner hidden">
+      📡 <span id="offline-text">You are offline - using local storage</span>
+    </div>
+
     <header>
       <div class="header-top">
         <img src="img/vectorink-vectorizer-result.svg" alt="BlockLogic" class="logo">
@@ -100,5 +109,58 @@
   <script src="js/InputHandler.js"></script>
   <script src="js/Game.js"></script>
   <script src="js/main.js"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    // Register service worker for offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('Service Worker registered successfully:', registration);
+            
+            // Listen for updates
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'activated') {
+                  // New service worker is ready
+                  console.log('Service Worker updated');
+                  // Optionally show update notification
+                  const event = new CustomEvent('appUpdate', { detail: registration });
+                  window.dispatchEvent(event);
+                }
+              });
+            });
+          })
+          .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+          });
+      });
+      
+      // Handle app update event
+      window.addEventListener('appUpdate', (event) => {
+        console.log('App update available');
+        const registration = event.detail;
+        // Optionally show a notification and allow user to refresh
+      });
+    }
+
+    // Detect online/offline status
+    let isOnline = navigator.onLine;
+    
+    window.addEventListener('online', () => {
+      isOnline = true;
+      console.log('[App] Back online');
+      // Trigger sync for pending scores
+      const appUpdateEvent = new Event('app-online');
+      window.dispatchEvent(appUpdateEvent);
+    });
+    
+    window.addEventListener('offline', () => {
+      isOnline = false;
+      console.log('[App] Gone offline');
+    });
+  </script>
 </body>
 </html>
