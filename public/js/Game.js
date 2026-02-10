@@ -32,6 +32,8 @@ class Game {
     this.isGameOver = false;
     this.isAnimating = false;
     this.floatingTexts = [];
+    this.clearingCells = null;
+    this.animationProgress = 0;
     
     this.inputHandler = new InputHandler(canvas, this);
     
@@ -195,6 +197,11 @@ class Game {
   render() {
     this.renderer.drawGrid(this.grid.cells);
     
+    // Draw clearing animation if active
+    if (this.isAnimating && this.clearingCells) {
+      this.renderer.drawClearingCells(this.clearingCells, this.animationProgress);
+    }
+    
     this.renderer.drawHand(this.hand);
     
     // If dragging, re-draw the dragging piece and preview
@@ -252,7 +259,7 @@ class Game {
     if (clearCount > 0) {
       setTimeout(() => {
         this.checkGameOver();
-      }, 450); // Slightly longer than animation duration
+      }, 180); // Slightly longer than animation duration
     } else {
       this.checkGameOver();
     }
@@ -264,17 +271,59 @@ class Game {
   async animateClears(clears) {
     this.isAnimating = true;
     
-    const duration = 400;
-    const steps = 20;
+    // Get cells to clear for animation
+    this.clearingCells = this.getClearingCells(clears);
+    
+    const duration = 160; // Snappy animation
+    const steps = 8;
     const stepDuration = duration / steps;
     
     for (let step = 0; step <= steps; step++) {
+      this.animationProgress = step / steps;
+      this.render();
       await this.sleep(stepDuration);
     }
     
     this.grid.clearLines(clears);
+    this.clearingCells = null;
+    this.animationProgress = 0;
     this.isAnimating = false;
     this.render();
+  }
+
+  getClearingCells(clears) {
+    const cells = [];
+    
+    // Add row cells
+    clears.rows.forEach(row => {
+      for (let col = 0; col < 9; col++) {
+        cells.push({ row, col });
+      }
+    });
+    
+    // Add column cells
+    clears.cols.forEach(col => {
+      for (let row = 0; row < 9; row++) {
+        if (!cells.some(c => c.row === row && c.col === col)) {
+          cells.push({ row, col });
+        }
+      }
+    });
+    
+    // Add square cells
+    clears.squares.forEach(square => {
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          const row = square.row * 3 + r;
+          const col = square.col * 3 + c;
+          if (!cells.some(cell => cell.row === row && cell.col === col)) {
+            cells.push({ row, col });
+          }
+        }
+      }
+    });
+    
+    return cells;
   }
 
   sleep(ms) {

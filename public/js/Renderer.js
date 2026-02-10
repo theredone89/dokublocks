@@ -257,6 +257,34 @@ class Renderer {
     this.ctx.globalAlpha = 1.0;
   }
 
+  drawClearingCells(cells, progress) {
+    if (!cells || cells.length === 0) return;
+    
+    this.ctx.save();
+    
+    // Fade out: alpha goes from 1 to 0
+    const alpha = 1 - progress;
+    this.ctx.globalAlpha = alpha;
+    
+    // Zoom: scale goes from 1 to 1.3
+    const scale = 1 + (progress * 0.3);
+    
+    cells.forEach(({ row, col }) => {
+      const centerX = this.gridOffset.x + (col + 0.5) * this.cellSize;
+      const centerY = this.gridOffset.y + (row + 0.5) * this.cellSize;
+      
+      const size = this.cellSize * scale;
+      const x = centerX - size / 2;
+      const y = centerY - size / 2;
+      
+      // Draw scaled cell
+      this.ctx.fillStyle = this.colors.highlight;
+      this.ctx.fillRect(x + 1, y + 1, size - 2, size - 2);
+    });
+    
+    this.ctx.restore();
+  }
+
   drawFloatingText(x, y, text, alpha) {
     this.ctx.save();
     this.ctx.globalAlpha = alpha;
