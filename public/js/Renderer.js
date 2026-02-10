@@ -17,12 +17,12 @@ class Renderer {
     
     this.lightColors = {
       background: '#f5f5f5',
-      gridLine: '#ccc',
-      subgridLine: '#888',
+      gridLine: '#125ec2',
+      subgridLine: '#0f417f',
       emptyCell: '#ffffff',
-      filledCell: '#64b5f6',
-      highlight: '#4caf50',
-      ghost: '#ff9800'
+      filledCell: '#3a8dd1',
+      highlight: '#3603c0',
+      ghost: '#41a6ff'
     };
     
     this.colors = this.darkColors;
