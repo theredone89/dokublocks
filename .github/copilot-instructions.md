@@ -7,13 +7,14 @@ This is **BlockLogic**, a browser-based Blockudoku puzzle game that combines Sud
 ## Technology Stack
 
 ### Frontend
+- Use Node 25+ for development and testing
 - Vanilla JavaScript (ES6+)
 - HTML5 Canvas API (Context 2D) for rendering
 - CSS for layout and styling
 - Class-based OOP architecture
 
 ### Backend
-- Node.js runtime
+- Node.js runtime (18+ required for testing with Playwright)
 - Express.js framework
 - JSON file storage for data persistence (`db/scores.json`)
 
@@ -30,6 +31,7 @@ This is **BlockLogic**, a browser-based Blockudoku puzzle game that combines Sud
   - `Renderer.js` - Canvas rendering engine
   - `InputHandler.js` - User interaction handling
   - `Game.js` - Main game controller
+  - `ScoreBackupManager.js` - Offline score persistence and sync
 
 ### State Management
 Use class-based OOP with these core classes:
@@ -37,6 +39,11 @@ Use class-based OOP with these core classes:
 - `Grid` - Manages 9x9 grid state (2D array: 0=empty, 1=filled)
 - `Piece` - Represents polyomino shapes as matrices
 - `ScoreManager` - Tracks and calculates scores
+- `ScoreBackupManager` - Handles offline score storage and sync
+- `Renderer` - Canvas-based rendering with theme support
+- `InputHandler` - Drag-and-drop piece placement
+- `PieceGenerator` - Random piece generation
+- `FloatingText` - Animated score popups
 
 ## Game Constants
 
@@ -93,6 +100,12 @@ drawHand(pieces)      // Renders available pieces below grid
    - Animate clears with fade-out effects
    - Show floating score text (e.g., "+100")
 
+7. **Modal System**: Custom modals instead of browser dialogs
+   - Confirm Modal: `showConfirmDialog(message, onConfirm, onCancel)`
+   - Alert Modal: `showDialog(message, onClose)`
+   - Game Over Modal: `showGameOverModal()` / `hideGameOverModal()`
+   - All modals use `.hidden` class for visibility control
+
 ## Data Storage
 
 Scores are persisted in `/db/scores.json` with the following structure:
@@ -112,12 +125,67 @@ Helper functions in `server.js`:
 - `readScores()` - Reads and parses scores from JSON file
 - `writeScores(scores)` - Writes scores array to JSON file
 
-## Testing Focus Areas
+## Testing Infrastructure
 
-- Validate `checkClears()` correctly identifies full 3×3 subgrids
-- Ensure Game Over triggers only when truly no moves possible
-- Verify score persistence and leaderboard integration
-- Test drag-and-drop on both mouse and touch devices
+### Requirements
+- **Node.js 25+** (Playwright requirement)
+- **Playwright** for end-to-end testing
+
+### Before running tests ensure:
+- nvm is set to Node 25+: `nvm use`
+
+### Test Scripts
+```bash
+npm test              # Run all Playwright tests
+npm run test:ui       # Run tests in Playwright UI mode (interactive)
+npm run test:headed   # Run tests in headed browser mode (visible)
+```
+
+### Testing Framework
+- Located in `/tests/e2e.spec.js`
+- Uses Playwright Test framework
+- Tests run against local server at `http://localhost:3000`
+- Server must be running before tests execute
+
+### Test Best Practices
+
+1. **Modal Handling**:
+   - Game uses CUSTOM modals, not browser dialogs
+   - Confirm dialogs: Use `#confirm-modal`, `#confirm-yes-btn`, `#confirm-no-btn`
+   - Alert dialogs: Use `#dialog-modal`, `#dialog-ok-btn`
+   - Game Over modal: Use `#game-over-modal`
+   - Always wait for modals to appear: `await page.waitForSelector('#modal-id:not(.hidden)')`
+
+2. **State Management in Tests**:
+   - Always verify game is initialized: `window.game && window.game.hand.length === 3`
+   - Reset game state when needed: `window.game.init()`
+   - Wait for async operations (animations, score updates)
+   - Clean up modals in `afterEach` hooks
+
+3. **Timing Considerations**:
+   - Wait for game initialization before interactions
+   - Account for animation duration (400ms for clears)
+   - Use `waitForFunction` for state verification
+   - Add buffer time after state changes (200-300ms)
+
+4. **API Testing**:
+   - Test both success and error cases
+   - Validate response structure and status codes
+   - Verify data persistence across requests
+
+### Test Coverage Areas
+
+- UI element rendering and visibility
+- Grid initialization and state management
+- Piece placement validation and execution
+- Clear detection (rows, columns, 3×3 squares)
+- Score calculation and persistence
+- High score tracking across sessions
+- Game over detection and modal behavior
+- Restart functionality with confirmation
+- Leaderboard loading and display
+- API endpoint validation
+- Performance and responsiveness
 
 ## Development Workflow
 

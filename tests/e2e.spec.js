@@ -9,16 +9,38 @@ test.describe('BlockLogic - End-to-End Tests', () => {
     await page.waitForLoadState('networkidle');
     // Wait for canvas to be ready
     await page.waitForSelector('#game-canvas');
-    // Small delay to ensure all JS is loaded
-    await page.waitForTimeout(500);
+    // Wait for game to initialize
+    await page.waitForFunction(() => {
+      return window.game && window.game.hand && window.game.hand.length === 3;
+    }, { timeout: 5000 });
+    // Ensure game is not in game over state
+    await page.evaluate(() => {
+      if (window.game.isGameOver) {
+        window.game.init();
+      }
+    });
+    await page.waitForTimeout(200);
+  });
+
+  test.afterEach(async ({ page }) => {
+    // Clean up any open modals
+    await page.evaluate(() => {
+      const modals = ['game-over-modal', 'confirm-modal', 'dialog-modal'];
+      modals.forEach(id => {
+        const modal = document.getElementById(id);
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+      });
+    });
   });
 
   test('Game loads successfully with all UI elements', async ({ page }) => {
     // Check title
     await expect(page).toHaveTitle(/BlockLogic/);
     
-    // Check header elements
-    await expect(page.locator('h1')).toHaveText('BlockLogic');
+    // Check header elements (logo image instead of h1)
+    await expect(page.locator('.logo')).toBeVisible();
     await expect(page.locator('#current-score')).toBeVisible();
     await expect(page.locator('#high-score')).toBeVisible();
     
@@ -37,11 +59,15 @@ test.describe('BlockLogic - End-to-End Tests', () => {
   test('Canvas renders correctly', async ({ page }) => {
     const canvas = await page.locator('#game-canvas');
     
-    // Check canvas dimensions
+    // Check canvas dimensions (dynamically calculated based on screen size)
     const width = await canvas.getAttribute('width');
     const height = await canvas.getAttribute('height');
-    expect(width).toBe('600');
-    expect(height).toBe('750');
+    // Width should be reasonable (between 300-600px)
+    expect(parseInt(width)).toBeGreaterThanOrEqual(300);
+    expect(parseInt(width)).toBeLessThanOrEqual(600);
+    // Height should be reasonable (between 500-800px)
+    expect(parseInt(height)).toBeGreaterThanOrEqual(500);
+    expect(parseInt(height)).toBeLessThanOrEqual(800);
     
     // Take screenshot to verify rendering
     await expect(canvas).toBeVisible();
@@ -81,8 +107,16 @@ test.describe('BlockLogic - End-to-End Tests', () => {
   });
 
   test('Can place a piece on the grid', async ({ page }) => {
+    // Ensure game is ready and score is 0
+    await page.waitForFunction(() => {
+      return window.game && 
+             window.game.scoreManager.currentScore === 0 &&
+             !window.game.isGameOver;
+    });
+    
     // Get initial score
     const initialScore = await page.locator('#current-score').textContent();
+    expect(parseInt(initialScore)).toBe(0);
     
     // Get the first piece and place it
     const result = await page.evaluate(() => {
@@ -101,9 +135,21 @@ test.describe('BlockLogic - End-to-End Tests', () => {
       // Simulate piece placement
       game.placePiece(0, startX, startY);
       
+      // Check first block of the piece for verification
+      let filledCell = 0;
+      for (let py = 0; py < piece.shape.length; py++) {
+        for (let px = 0; px < piece.shape[py].length; px++) {
+          if (piece.shape[py][px] === 1) {
+            filledCell = game.grid.cells[startY + py][startX + px];
+            break;
+          }
+        }
+        if (filledCell === 1) break;
+      }
+      
       return { 
         success: true, 
-        gridCell: game.grid.cells[startY][startX],
+        gridCell: filledCell,
         handLength: game.hand.filter(p => p !== null).length
       };
     });
@@ -111,6 +157,9 @@ test.describe('BlockLogic - End-to-End Tests', () => {
     expect(result.success).toBe(true);
     expect(result.gridCell).toBe(1); // Cell should be filled
     expect(result.handLength).toBeLessThan(3); // One piece should be used
+    
+    // Wait for score update
+    await page.waitForTimeout(100);
     
     // Score should have increased
     const newScore = await page.locator('#current-score').textContent();
@@ -209,17 +258,21 @@ test.describe('BlockLogic - End-to-End Tests', () => {
     });
     
     // Wait for state to update
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(300);
     
-    // Setup dialog handler to accept the confirm
-    page.once('dialog', async dialog => {
-      expect(dialog.type()).toBe('confirm');
-      await dialog.accept();
-    });
+    // Verify score is not 0
+    const scoreBeforeRestart = await page.locator('#current-score').textContent();
+    expect(parseInt(scoreBeforeRestart)).toBeGreaterThan(0);
     
-    // Click restart
+    // Click restart - this shows a custom confirm modal
     await page.click('#restart-btn');
-    await page.waitForTimeout(500);
+    
+    // Wait for confirm modal to appear
+    await page.waitForSelector('#confirm-modal:not(.hidden)', { timeout: 2000 });
+    
+    // Click Yes button
+    await page.click('#confirm-yes-btn');
+    await page.waitForTimeout(300);
     
     // Check if game reset
     const state = await page.evaluate(() => {
@@ -238,14 +291,18 @@ test.describe('BlockLogic - End-to-End Tests', () => {
   });
 
   test('Game Over modal appears when no moves available', async ({ page }) => {
-    // Fill the grid to trigger game over
+    // Reset game to ensure clean slate
+    await page.evaluate(() => {
+      window.game.init();
+    });
+    await page.waitForTimeout(200);
+    
+    // Trigger game over directly
     await page.evaluate(() => {
       const game = window.game;
-      // Fill most of the grid leaving no space for pieces
+      // Completely fill the grid leaving no space
       for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
-          // Leave just a few random cells empty that won't fit any piece
-          if (Math.random() > 0.95) continue;
           game.grid.cells[row][col] = 1;
         }
       }
@@ -253,7 +310,8 @@ test.describe('BlockLogic - End-to-End Tests', () => {
       game.checkGameOver();
     });
     
-    await page.waitForTimeout(500);
+    // Wait for modal to appear
+    await page.waitForSelector('#game-over-modal:not(.hidden)', { timeout: 3000 });
     
     // Check if modal is visible
     const modalVisible = await page.locator('#game-over-modal').isVisible();
@@ -284,6 +342,12 @@ test.describe('BlockLogic - End-to-End Tests', () => {
   });
 
   test('Score submission works correctly', async ({ page }) => {
+    // Ensure game is in a fresh state
+    await page.evaluate(() => {
+      window.game.init();
+    });
+    await page.waitForTimeout(200);
+    
     // Trigger game over
     await page.evaluate(() => {
       const game = window.game;
@@ -291,23 +355,25 @@ test.describe('BlockLogic - End-to-End Tests', () => {
       game.triggerGameOver();
     });
     
-    await page.waitForTimeout(500);
-    
-    // Setup dialog handler to accept the alert
-    page.on('dialog', async dialog => {
-      await dialog.accept();
-    });
+    // Wait for modal to appear
+    await page.waitForSelector('#game-over-modal:not(.hidden)', { timeout: 5000 });
     
     // Enter username
     await page.fill('#username', 'TestPlayer');
     
-    // Submit score
+    // Submit score - this will trigger a custom alert modal
     await page.click('#submit-score-btn');
     
-    // Wait for submission and alert
-    await page.waitForTimeout(2000);
+    // Wait for custom dialog modal to appear
+    await page.waitForSelector('#dialog-modal:not(.hidden)', { timeout: 3000 });
     
-    // Modal should close after alert is dismissed
+    // Click OK on the custom alert
+    await page.click('#dialog-ok-btn');
+    
+    // Wait for modals to close
+    await page.waitForTimeout(500);
+    
+    // Game over modal should be hidden after submission
     const modalHidden = await page.locator('#game-over-modal').evaluate(el => 
       el.classList.contains('hidden')
     );
@@ -315,12 +381,19 @@ test.describe('BlockLogic - End-to-End Tests', () => {
   });
 
   test('Play Again button in modal restarts game', async ({ page }) => {
+    // Reset game first
+    await page.evaluate(() => {
+      window.game.init();
+    });
+    await page.waitForTimeout(200);
+    
     // Trigger game over
     await page.evaluate(() => {
       window.game.triggerGameOver();
     });
     
-    await page.waitForTimeout(500);
+    // Wait for modal to appear
+    await page.waitForSelector('#game-over-modal:not(.hidden)', { timeout: 3000 });
     
     // Click Play Again
     await page.click('#play-again-btn');
@@ -450,7 +523,7 @@ test.describe('BlockLogic - End-to-End Tests', () => {
       window.game.updateScoreDisplay();
     });
     
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(200);
     
     let highScore = await page.locator('#high-score').textContent();
     const highScoreValue = parseInt(highScore);
@@ -458,8 +531,12 @@ test.describe('BlockLogic - End-to-End Tests', () => {
     // High score should be at least 500
     expect(highScoreValue).toBeGreaterThanOrEqual(500);
     
-    // Restart game
+    // Click restart button
     await page.click('#restart-btn');
+    
+    // Wait for and handle confirm modal
+    await page.waitForSelector('#confirm-modal:not(.hidden)', { timeout: 2000 });
+    await page.click('#confirm-yes-btn');
     await page.waitForTimeout(300);
     
     // High score should persist

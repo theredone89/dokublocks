@@ -148,5 +148,53 @@
     "username": "Red",
     "score": 1010,
     "timestamp": "2026-02-06T09:51:10.332Z"
+  },
+  {
+    "id": 1770746388520,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-02-10T17:59:48.520Z"
+  },
+  {
+    "id": 1770746422644,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-02-10T18:00:22.644Z"
+  },
+  {
+    "id": 1770746913034,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-02-10T18:08:33.034Z"
+  },
+  {
+    "id": 1770746917718,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-02-10T18:08:37.718Z"
+  },
+  {
+    "id": 1770746960686,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-02-10T18:09:20.686Z"
+  },
+  {
+    "id": 1770746965449,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-02-10T18:09:25.449Z"
+  },
+  {
+    "id": 1770747070329,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-02-10T18:11:10.329Z"
+  },
+  {
+    "id": 1770747075016,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-02-10T18:11:15.016Z"
   }
 ]
