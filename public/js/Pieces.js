@@ -65,19 +65,31 @@ class Piece {
 class PieceGenerator {
   constructor() {
     this.availableShapes = Object.keys(PIECE_SHAPES);
+    this.smallPieces = ['DOT', 'DOMINO_H', 'DOMINO_V']; // 1-2 cell pieces
   }
 
-  getRandomPiece() {
+  getRandomPiece(gridFillPercentage = 0) {
+    // When grid is over 82% full, favor smaller pieces
+    if (gridFillPercentage > 82) {
+      // 33% chance of getting a small piece when grid is crowded
+      if (Math.random() < 0.33) {
+        const randomIndex = Math.floor(Math.random() * this.smallPieces.length);
+        const shapeName = this.smallPieces[randomIndex];
+        return new Piece(PIECE_SHAPES[shapeName], shapeName);
+      }
+    }
+    
+    // Default random selection
     const randomIndex = Math.floor(Math.random() * this.availableShapes.length);
     const shapeName = this.availableShapes[randomIndex];
     return new Piece(PIECE_SHAPES[shapeName], shapeName);
   }
 
-  generateBatch() {
+  generateBatch(gridFillPercentage = 0) {
     return [
-      this.getRandomPiece(),
-      this.getRandomPiece(),
-      this.getRandomPiece()
+      this.getRandomPiece(gridFillPercentage),
+      this.getRandomPiece(gridFillPercentage),
+      this.getRandomPiece(gridFillPercentage)
     ];
   }
 }

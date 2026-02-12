@@ -107,7 +107,7 @@ class Game {
   init() {
     this.grid.reset();
     this.scoreManager.reset();
-    this.hand = this.pieceGenerator.generateBatch();
+    this.hand = this.pieceGenerator.generateBatch(this.grid.getFilledPercentage());
     this.isGameOver = false;
     this.floatingTexts = [];
     this.render();
@@ -250,7 +250,7 @@ class Game {
     this.hand[pieceIndex] = null;
     
     if (this.hand.every(p => p === null)) {
-      this.hand = this.pieceGenerator.generateBatch();
+      this.hand = this.pieceGenerator.generateBatch(this.grid.getFilledPercentage());
     }
     
     this.updateScoreDisplay();

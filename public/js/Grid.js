@@ -130,6 +130,21 @@ class Grid {
     return true;
   }
 
+  getFilledPercentage() {
+    let filledCount = 0;
+    const totalCells = this.size * this.size;
+    
+    for (let row = 0; row < this.size; row++) {
+      for (let col = 0; col < this.size; col++) {
+        if (this.cells[row][col] === 1) {
+          filledCount++;
+        }
+      }
+    }
+    
+    return (filledCount / totalCells) * 100;
+  }
+
   clearLines(clears) {
     // Clear rows
     clears.rows.forEach(row => {
