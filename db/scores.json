@@ -208,5 +208,17 @@
     "username": "E2ETest",
     "score": 500,
     "timestamp": "2026-02-10T18:20:53.253Z"
+  },
+  {
+    "id": 1770924358166,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-02-12T19:25:58.166Z"
+  },
+  {
+    "id": 1770924362939,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-02-12T19:26:02.939Z"
   }
 ]

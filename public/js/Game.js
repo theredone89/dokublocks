@@ -224,7 +224,7 @@ class Game {
     animate();
   }
 
-  placePiece(pieceIndex, gridX, gridY) {
+  async placePiece(pieceIndex, gridX, gridY) {
     const piece = this.hand[pieceIndex];
     
     if (!piece || !this.grid.canPlacePiece(piece, gridX, gridY)) {
@@ -238,7 +238,7 @@ class Game {
     const clearCount = clears.rows.length + clears.cols.length + clears.squares.length;
     
     if (clearCount > 0) {
-      this.animateClears(clears);
+      await this.animateClears(clears);
     }
     
     const points = this.scoreManager.calculateScore(blockCount, clearCount);
@@ -255,14 +255,8 @@ class Game {
     
     this.updateScoreDisplay();
     
-    // Check game over after animation completes (if there was a clear)
-    if (clearCount > 0) {
-      setTimeout(() => {
-        this.checkGameOver();
-      }, 180); // Slightly longer than animation duration
-    } else {
-      this.checkGameOver();
-    }
+    // Check game over after blocks are cleared
+    this.checkGameOver();
     
     this.render();
     return true;

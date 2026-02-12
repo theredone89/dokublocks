@@ -322,6 +322,82 @@ test.describe('BlockLogic - End-to-End Tests', () => {
     await expect(page.locator('#final-score')).toBeVisible();
   });
 
+  test('Game does not end prematurely when clearing blocks creates space', async ({ page }) => {
+    // This test verifies the bug fix where game over was triggered
+    // before blocks were cleared, causing false game overs
+    
+    const result = await page.evaluate(async () => {
+      const game = window.game;
+      
+      // Reset to clean state
+      game.init();
+      
+      // Create a scenario where the grid is mostly full
+      // Fill row 0, leaving only position [0][8] empty
+      for (let col = 0; col < 8; col++) {
+        game.grid.cells[0][col] = 1;
+      }
+      
+      // Fill most other cells to make it hard for pieces to fit
+      for (let row = 1; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+          // Leave some strategic spaces
+          if (!(row === 1 && col < 3)) {
+            game.grid.cells[row][col] = 1;
+          }
+        }
+      }
+      
+      // Create a simple single-block piece to complete the row
+      const singleBlock = new Piece([[1]]);
+      
+      // Create pieces that would fit in the cleared space but not in current grid
+      const smallPiece1 = new Piece([[1, 1]]);
+      const smallPiece2 = new Piece([[1]]);
+      
+      // Set hand with specific pieces
+      game.hand = [singleBlock, smallPiece1, smallPiece2];
+      
+      // Place the single block at [0][8] to complete row 0
+      // This should clear the row and create space
+      await game.placePiece(0, 8, 0);
+      
+      // Wait a bit for animation to complete
+      await new Promise(resolve => setTimeout(resolve, 250));
+      
+      // Check game state
+      return {
+        isGameOver: game.isGameOver,
+        remainingPiecesCount: game.hand.filter(p => p !== null).length,
+        row0Cleared: game.grid.cells[0].every(cell => cell === 0),
+        canPlaceRemainingPieces: game.hand.some((piece, idx) => {
+          if (!piece) return false;
+          // Check if this piece can be placed anywhere
+          for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+              if (game.grid.canPlacePiece(piece, col, row)) {
+                return true;
+              }
+            }
+          }
+          return false;
+        })
+      };
+    });
+    
+    // Verify the game is NOT over
+    expect(result.isGameOver).toBe(false);
+    
+    // Verify row 0 was actually cleared
+    expect(result.row0Cleared).toBe(true);
+    
+    // Verify there are still pieces in hand
+    expect(result.remainingPiecesCount).toBeGreaterThan(0);
+    
+    // Verify at least one remaining piece can be placed (proving space exists)
+    expect(result.canPlaceRemainingPieces).toBe(true);
+  });
+
   test('Leaderboard loads and displays scores', async ({ page }) => {
     // Click refresh to load leaderboard
     await page.click('#refresh-leaderboard-btn');
