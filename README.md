@@ -3,7 +3,7 @@
 A browser-based puzzle game combining Sudoku grids with Tetris-style block placement mechanics. Players strategically place polyomino shapes on a 9x9 grid to clear rows, columns, and 3x3 subgrids.
 
 ## Play Offline Demo
-[BlockLogic Game]([https://www.genome.gov/](https://theredone89.github.io/dokublocks/public/index.html))
+[BlockLogic Game](https://theredone89.github.io/dokublocks/public/index.html)
 
 
 ## Features
