@@ -2,11 +2,12 @@
   "name": "dokublocks",
   "version": "1.0.0",
   "description": "Javascript Game a combination of tetris and sudoku board",
-  "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "prod": "PROD=true node src/server.js",
-    "dev": "nodemon src/server.js",
+    "dev": "nuxt dev --host localhost --port 3000",
+    "build": "nuxt build",
+    "start": "nuxt preview --host localhost --port 3000",
+    "prod": "nuxt build && nuxt preview --host localhost --port 3000",
+    "migrate": "node scripts/migrate.mjs",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed"
@@ -23,12 +24,13 @@
   },
   "homepage": "https://github.com/theredone89/dokublocks#readme",
   "dependencies": {
-    "better-sqlite3": "^12.6.2",
-    "cors": "^2.8.6",
-    "express": "^4.22.1",
-    "nodemon": "^3.1.11"
+    "@netlify/neon": "^0.1.2",
+    "@vite-pwa/nuxt": "^1.1.1",
+    "nuxt": "^4.3.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.0"
+    "@playwright/test": "^1.58.0",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.2.5"
   }
 }

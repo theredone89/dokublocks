@@ -3,7 +3,7 @@
 A browser-based puzzle game combining Sudoku grids with Tetris-style block placement mechanics. Players strategically place polyomino shapes on a 9x9 grid to clear rows, columns, and 3x3 subgrids.
 
 ## Play Offline Demo
-[BlockLogic Game](https://theredone89.github.io/dokublocks/public/index.html)
+[BlockLogic Game](https://theredone89.github.io/dokublocks/)
 
 
 ## Features
@@ -32,8 +32,8 @@ cd dokublocks
 # Install dependencies
 npm install
 
-# Start the server
-npm start
+# Start Nuxt in development mode
+npm run dev
 ```
 
 The game will be available at `http://localhost:3000`
@@ -41,8 +41,25 @@ The game will be available at `http://localhost:3000`
 ## Development
 
 ```bash
-# Run in development mode with auto-restart
+# Run in development mode
 npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm start
+
+# Run Neon DB migration (if using Neon)
+npm run migrate
+```
+
+If you are using Neon, set one of these environment variables:
+
+```bash
+NETLIFY_DATABASE_URL=...
+# or
+DATABASE_URL=...
 ```
 
 ## Technology Stack
@@ -55,8 +72,9 @@ npm run dev
 
 ### Backend
 - Node.js
-- Express.js
-- JSON file-based data storage
+- Nuxt Nitro server routes (`/api/*`)
+- Neon PostgreSQL via `@netlify/neon`
+- JSON file fallback storage for local/dev (`db/scores.json`)
 - RESTful API
 
 ## Game Mechanics
@@ -79,7 +97,16 @@ npm run dev
 
 ```
 dokublocks/
-├── public/           # Frontend files
+├── pages/            # Nuxt pages
+│   └── index.vue
+├── server/           # Nitro API and server utilities
+│   ├── api/
+│   │   ├── leaderboard.get.ts
+│   │   └── score.post.ts
+│   ├── database/
+│   │   └── migrations/
+│   └── utils/
+├── public/           # Static assets and game scripts used by Nuxt page
 │   ├── css/
 │   │   └── styles.css
 │   ├── js/
@@ -90,9 +117,9 @@ dokublocks/
 │   │   ├── InputHandler.js
 │   │   ├── Game.js
 │   │   └── main.js
-│   └── index.html
-├── src/              # Backend files
-│   └── server.js
+├── scripts/
+│   └── migrate.mjs
+├── nuxt.config.ts
 ├── db/               # Data storage
 │   └── scores.json
 └── tasks/            # Development tasks and specs

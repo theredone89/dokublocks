@@ -226,5 +226,35 @@
     "username": "Alin",
     "score": 26920,
     "timestamp": "2026-02-12T20:21:43.944Z"
+  },
+  {
+    "id": 1771968303345,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-02-24T21:25:03.345Z"
+  },
+  {
+    "id": 1771968308168,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-02-24T21:25:08.168Z"
+  },
+  {
+    "id": 1771968447353,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-02-24T21:27:27.353Z"
+  },
+  {
+    "id": 1771968452221,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-02-24T21:27:32.221Z"
+  },
+  {
+    "id": 1771969385650,
+    "username": "Alin",
+    "score": 18960,
+    "timestamp": "2026-02-24T21:43:05.650Z"
   }
 ]
