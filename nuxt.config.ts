@@ -4,7 +4,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-02-24',
   vite: {
     server: {
-      allowedHosts: ['devserver-main--superb-pony-7bb699.netlify.app']
+      allowedHosts: [
+        'devserver-main--superb-pony-7bb699.netlify.app',
+        'blocklogic.netlify.app'
+      ]
     }
   },
   experimental: {
