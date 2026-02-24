@@ -1,5 +1,7 @@
 import { defineNuxtConfig } from 'nuxt/config';
 
+const PRODUCTION_DOMAIN = 'https://blocklogic.netlify.app';
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-02-24',
   vite: {
@@ -33,6 +35,7 @@ export default defineNuxtConfig({
         }
       ],
       link: [
+        { rel: 'canonical', href: PRODUCTION_DOMAIN },
         { rel: 'stylesheet', href: '/css/styles.css' },
         { rel: 'icon', type: 'image/png', href: '/img/icon-192.png' },
         { rel: 'apple-touch-icon', href: '/img/icon-192.png' }
@@ -50,7 +53,10 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    neonDatabaseUrl: process.env.NETLIFY_DATABASE_URL || process.env.DATABASE_URL || ''
+    neonDatabaseUrl: process.env.NETLIFY_DATABASE_URL || process.env.DATABASE_URL || '',
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || PRODUCTION_DOMAIN
+    }
   },
   pwa: {
     registerType: 'autoUpdate',
