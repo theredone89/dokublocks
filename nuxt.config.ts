@@ -2,6 +2,11 @@ import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-02-24',
+  vite: {
+    server: {
+      allowedHosts: ['devserver-main--superb-pony-7bb699.netlify.app']
+    }
+  },
   experimental: {
     appManifest: false
   },
