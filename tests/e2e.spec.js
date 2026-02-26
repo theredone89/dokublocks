@@ -456,6 +456,42 @@ test.describe('BlockLogic - End-to-End Tests', () => {
     expect(modalHidden).toBe(true);
   });
 
+  test('Submit button disables after first click on game over', async ({ page }) => {
+    let submitRequestCount = 0;
+
+    await page.route('**/api/score', async route => {
+      submitRequestCount += 1;
+      await new Promise(resolve => setTimeout(resolve, 250));
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true, rank: 1 })
+      });
+    });
+
+    await page.evaluate(() => {
+      window.game.init();
+      window.game.scoreManager.currentScore = 777;
+      window.game.triggerGameOver();
+    });
+
+    await page.waitForSelector('#game-over-modal:not(.hidden)', { timeout: 5000 });
+    await page.fill('#username', 'DoubleClickTest');
+
+    const submitButton = page.locator('#submit-score-btn');
+    await submitButton.click();
+
+    await expect(submitButton).toBeDisabled();
+
+    await submitButton.click({ force: true });
+    await page.waitForTimeout(400);
+
+    expect(submitRequestCount).toBe(1);
+
+    await page.waitForSelector('#dialog-modal:not(.hidden)', { timeout: 3000 });
+    await page.click('#dialog-ok-btn');
+  });
+
   test('Play Again button in modal restarts game', async ({ page }) => {
     // Reset game first
     await page.evaluate(() => {

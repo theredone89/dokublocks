@@ -256,5 +256,23 @@
     "username": "Alin",
     "score": 18960,
     "timestamp": "2026-02-24T21:43:05.650Z"
+  },
+  {
+    "id": 1772137901025,
+    "username": "TestPlayer",
+    "score": 999,
+    "timestamp": "2026-02-26T20:31:41.025Z"
+  },
+  {
+    "id": 1772137907105,
+    "username": "E2ETest",
+    "score": 500,
+    "timestamp": "2026-02-26T20:31:47.105Z"
+  },
+  {
+    "id": 1772138128160,
+    "username": "Alin",
+    "score": 4140,
+    "timestamp": "2026-02-26T20:35:28.160Z"
   }
 ]

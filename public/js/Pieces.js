@@ -69,8 +69,8 @@ class PieceGenerator {
   }
 
   getRandomPiece(gridFillPercentage = 0) {
-    // When grid is over 82% full, favor smaller pieces
-    if (gridFillPercentage > 82) {
+    // When grid is over 80% full, favor smaller pieces
+    if (gridFillPercentage > 80) {
       // 55% chance of getting a small piece when grid is crowded
       if (Math.random() < 0.55) {
         const randomIndex = Math.floor(Math.random() * this.smallPieces.length);

@@ -31,6 +31,7 @@ class Game {
     this.hand = [];
     this.isGameOver = false;
     this.isAnimating = false;
+    this.isSubmittingScore = false;
     this.floatingTexts = [];
     this.clearingCells = null;
     this.animationProgress = 0;
@@ -360,10 +361,15 @@ class Game {
     const modal = document.getElementById('game-over-modal');
     const finalScore = document.getElementById('final-score');
     const highScore = document.getElementById('modal-high-score');
+    const submitBtn = document.getElementById('submit-score-btn');
     
     if (modal && finalScore && highScore) {
       finalScore.textContent = this.scoreManager.getScore();
       highScore.textContent = this.scoreManager.getHighScore();
+      this.isSubmittingScore = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+      }
       modal.classList.remove('hidden');
       
       const usernameInput = document.getElementById('username');
@@ -375,8 +381,13 @@ class Game {
 
   hideGameOverModal() {
     const modal = document.getElementById('game-over-modal');
+    const submitBtn = document.getElementById('submit-score-btn');
     if (modal) {
       modal.classList.add('hidden');
+      this.isSubmittingScore = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+      }
       const usernameInput = document.getElementById('username');
       if (usernameInput) {
         usernameInput.value = '';
@@ -442,6 +453,16 @@ class Game {
   }
 
   async submitScore() {
+    if (this.isSubmittingScore) {
+      return;
+    }
+
+    this.isSubmittingScore = true;
+    const submitBtn = document.getElementById('submit-score-btn');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+    }
+
     const usernameInput = document.getElementById('username');
     const username = usernameInput ? usernameInput.value.trim() || 'Anonymous' : 'Anonymous';
     const score = this.scoreManager.getScore();
