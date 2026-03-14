@@ -150,7 +150,6 @@ class Game {
   setupEventListeners() {
     const submitBtn = document.getElementById('submit-score-btn');
     const playAgainBtn = document.getElementById('play-again-btn');
-    const restartBtn = document.getElementById('restart-btn');
     const refreshBtn = document.getElementById('refresh-leaderboard-btn');
     
     if (submitBtn) {
@@ -164,58 +163,48 @@ class Game {
       });
     }
     
-    if (restartBtn) {
-      restartBtn.addEventListener('click', () => {
-        this.showConfirmDialog(
-          'Are you sure you want to restart? Your current progress will be lost.',
-          () => this.init()
-        );
-      });
-    }
+    
     
     if (refreshBtn) {
       refreshBtn.addEventListener('click', () => this.loadLeaderboard());
     }
     
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-      // Load saved theme preference
-      const savedTheme = localStorage.getItem('blocklogic-theme');
+    // Theme handling: apply saved theme and listen for changes from settings page
+    (function() {
       const themeColorMeta = document.getElementById('theme-color-meta');
       const appleStatusBar = document.getElementById('apple-status-bar');
-      
-      if (savedTheme === 'light') {
-        themeToggle.checked = true;
-        this.renderer.setTheme(true);
-        document.body.classList.add('light-theme');
-        if (themeColorMeta) {
-          themeColorMeta.setAttribute('content', '#e3f2fd');
-        }
-        if (appleStatusBar) {
-          appleStatusBar.setAttribute('content', 'default');
-        }
-      }
-      
-      themeToggle.addEventListener('change', (e) => {
-        const isLight = e.target.checked;
-        this.renderer.setTheme(isLight);
-        document.body.classList.toggle('light-theme', isLight);
-        localStorage.setItem('blocklogic-theme', isLight ? 'light' : 'dark');
-        
-        // Update theme-color meta tag for tab tinting
-        if (themeColorMeta) {
-          themeColorMeta.setAttribute('content', isLight ? '#e3f2fd' : '#1a1a2e');
-        }
-        
-        // Update Apple status bar style
-        if (appleStatusBar) {
-          appleStatusBar.setAttribute('content', isLight ? 'default' : 'black-translucent');
-        }
-        
+
+      const applyTheme = (isLight) => {
+        try { this.renderer.setTheme(!!isLight); } catch (e) {}
+        document.body.classList.toggle('light-theme', !!isLight);
+        if (themeColorMeta) themeColorMeta.setAttribute('content', isLight ? '#e3f2fd' : '#1a1a2e');
+        if (appleStatusBar) appleStatusBar.setAttribute('content', isLight ? 'default' : 'black-translucent');
         this.render();
-      });
-    }
+      };
+
+      // Apply saved theme at startup
+      const savedTheme = localStorage.getItem('blocklogic-theme');
+      applyTheme(savedTheme === 'light');
+
+      // If a toggle exists on this page, wire it up too
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.checked = (savedTheme === 'light');
+        themeToggle.addEventListener('change', (e) => {
+          const isLight = e.target.checked;
+          localStorage.setItem('blocklogic-theme', isLight ? 'light' : 'dark');
+          window.dispatchEvent(new CustomEvent('blocklogic-theme-change', { detail: { isLight } }));
+          applyTheme(isLight);
+        });
+      }
+
+      // Listen for theme change broadcasts (from settings page)
+      const themeHandler = (e) => {
+        const isLight = e && e.detail && typeof e.detail.isLight === 'boolean' ? e.detail.isLight : null;
+        if (typeof isLight === 'boolean') applyTheme(isLight);
+      };
+      window.addEventListener('blocklogic-theme-change', themeHandler);
+    }).call(this);
     
     const usernameInput = document.getElementById('username');
     if (usernameInput) {
@@ -711,6 +700,16 @@ class Game {
     
     if (highScore) {
       highScore.textContent = this.scoreManager.getHighScore().toLocaleString();
+    }
+    try {
+      window.dispatchEvent(new CustomEvent('blocklogic-score-update', {
+        detail: {
+          currentScore: this.scoreManager.getScore(),
+          highScore: this.scoreManager.getHighScore()
+        }
+      }));
+    } catch (e) {
+      // ignore
     }
   }
 }

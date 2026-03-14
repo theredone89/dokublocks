@@ -1,13 +1,8 @@
 <template>
   <div class="container leaderboard-page">
-    <header>
-      <NuxtLink to="/menu" class="back-button-fixed" id="back-btn" aria-label="Back to menu">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </NuxtLink>
+    <Header>
       <h1>Leaderboard</h1>
-    </header>
+    </Header>
 
     <main>
       <div id="leaderboard-area">
@@ -38,6 +33,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import Header from '~/components/Header.vue';
 
 const scores = ref([]);
 const loading = ref(true);
@@ -81,6 +77,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
+@import '/src/commons/buttons.css';
+
 .leaderboard-page { padding: 1rem; }
 
 #leaderboard-area {
@@ -187,8 +185,6 @@ onMounted(() => {
 
 @keyframes skeleton-pulse { 0% { opacity: 0.6 } 50% { opacity: 0.3 } 100% { opacity: 0.6 } }
 
-.game-button {
-  text-decoration: none;;
-}
+/* Button base styles are in public/css/buttons.css */
 
 </style>

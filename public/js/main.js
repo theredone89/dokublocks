@@ -7,7 +7,11 @@ const handleQueryActions = (gameInstance) => {
       if (gameInstance && typeof gameInstance.loadState === 'function') {
         setTimeout(() => {
           gameInstance.loadState();
-          history.replaceState(null, '', window.location.pathname + window.location.hash);
+          try {
+            history.replaceState(history.state, '', window.location.pathname + window.location.hash);
+          } catch (e) {
+            history.replaceState(null, '', window.location.pathname + window.location.hash);
+          }
         }, 0);
       }
     } else if (params.get('new') === '1') {
@@ -17,7 +21,11 @@ const handleQueryActions = (gameInstance) => {
           if (typeof gameInstance.init === 'function') {
             gameInstance.init();
           }
-          history.replaceState(null, '', window.location.pathname + window.location.hash);
+          try {
+            history.replaceState(history.state, '', window.location.pathname + window.location.hash);
+          } catch (e) {
+            history.replaceState(null, '', window.location.pathname + window.location.hash);
+          }
         }, 0);
       }
     }
@@ -65,6 +73,21 @@ const initIfCanvasPresent = () => {
     console.log('Drag pieces from below the grid to place them');
     // Apply query actions (load or clear saved state)
     try { handleQueryActions(game); } catch (e) { /* ignore */ }
+
+    // Ensure score display updates after Vue components mount (header may render asynchronously).
+    // Poll briefly for the score elements and call updateScoreDisplay once they exist.
+    (function waitForScoreElements() {
+      const maxAttempts = 40; // ~2s at 50ms intervals
+      let attempts = 0;
+      const iv = setInterval(() => {
+        attempts++;
+        const any = document.getElementById('high-score') || document.getElementById('modal-high-score') || document.getElementById('current-score');
+        if (any || attempts >= maxAttempts) {
+          try { game.updateScoreDisplay(); } catch (e) { /* ignore */ }
+          clearInterval(iv);
+        }
+      }, 50);
+    })();
     return true;
   } catch (e) {
     console.error('Failed to initialize game:', e);

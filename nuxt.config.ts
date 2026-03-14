@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'theme-color', content: '#1a1a2e', id: 'theme-color-meta' },
-        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent', id: 'apple-status-bar' },
         { name: 'apple-mobile-web-app-title', content: 'BlockLogic' },
         {
