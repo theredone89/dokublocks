@@ -9,7 +9,7 @@ module.exports = defineConfig({
   reporter: 'html',
   
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3005',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -23,7 +23,7 @@ module.exports = defineConfig({
 
   webServer: {
     command: 'npm run dev',
-    port: 3000,
+    port: 3005,
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
   },

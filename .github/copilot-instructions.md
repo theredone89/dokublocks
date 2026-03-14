@@ -23,7 +23,7 @@ This is **BlockLogic**, a browser-based Blockudoku puzzle game that combines Sud
 
 ### Dev Commands
 ```bash
-npm run dev    # nuxt dev --host localhost --port 3000
+npm run dev    # nuxt dev --host localhost --port 3005
 npm run build  # nuxt build
 npm run start  # nuxt preview
 npm run migrate # Run SQL migrations against Neon DB
@@ -183,7 +183,7 @@ npm run test:headed   # Run tests in headed browser mode (visible)
 ### Testing Framework
 - Located in `/tests/e2e.spec.js`
 - Uses Playwright Test framework
-- Tests run against local server at `http://localhost:3000`
+- Tests run against local server at `http://localhost:3005`
 - Server must be running before tests execute
 
 ### Test Best Practices

@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Javascript Game a combination of tetris and sudoku board",
   "scripts": {
-    "dev": "nuxt dev --host localhost --port 3000",
+    "dev": "nuxt dev --host localhost --port 3005",
     "build": "nuxt build",
-    "start": "nuxt preview --host localhost --port 3000",
-    "prod": "nuxt build && nuxt preview --host localhost --port 3000",
+    "start": "nuxt preview --host localhost --port 3005",
+    "prod": "nuxt build && nuxt preview --host localhost --port 3005",
     "migrate": "node scripts/migrate.mjs",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
