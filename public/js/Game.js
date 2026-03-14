@@ -45,6 +45,7 @@ class Game {
     this.setupResizeListener();
     this.setupSyncNotification();
     this.setupOfflineDetection();
+    this.setupContinueButton();
   }
 
   setupResizeListener() {
@@ -102,6 +103,37 @@ class Game {
     } else {
       banner.classList.remove('hidden');
       text.textContent = 'You are offline - using local storage';
+    }
+  }
+
+  // Continue button wiring
+  setupContinueButton() {
+    const continueBtn = document.getElementById('continue-btn');
+    const newGameBtn = document.getElementById('new-game-btn');
+
+    if (continueBtn) {
+      continueBtn.addEventListener('click', () => {
+        const loaded = this.loadState();
+        if (loaded) {
+          // Hide menu if present
+          const menu = document.querySelector('.menu-page');
+          if (menu) menu.classList.add('hidden');
+        } else {
+          // No saved state — start a new game
+          this.init();
+          const menu = document.querySelector('.menu-page');
+          if (menu) menu.classList.add('hidden');
+        }
+      });
+    }
+
+    if (newGameBtn) {
+      newGameBtn.addEventListener('click', () => {
+        // Start a fresh game and hide menu
+        this.init();
+        const menu = document.querySelector('.menu-page');
+        if (menu) menu.classList.add('hidden');
+      });
     }
   }
 
@@ -260,7 +292,69 @@ class Game {
     this.checkGameOver();
     
     this.render();
+    // Persist state after each successful placement
+    try {
+      this.saveState();
+    } catch (e) {
+      console.warn('[Game] Failed to save state:', e);
+    }
     return true;
+  }
+
+  // Save game state to localStorage so Continue can restore it
+  saveState() {
+    const state = {
+      grid: this.grid.cells,
+      score: this.scoreManager.currentScore || this.scoreManager.getScore(),
+      highScore: this.scoreManager.highScore || this.scoreManager.getHighScore(),
+      hand: this.hand.map(p => (p ? p.name : null)),
+      isGameOver: !!this.isGameOver,
+      timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('blocklogic-save', JSON.stringify(state));
+  }
+
+  // Load saved state; returns true if loaded
+  loadState() {
+    try {
+      const raw = localStorage.getItem('blocklogic-save');
+      if (!raw) return false;
+      const state = JSON.parse(raw);
+
+      if (state.grid && Array.isArray(state.grid)) {
+        this.grid.cells = state.grid;
+      }
+
+      if (typeof state.score === 'number') {
+        this.scoreManager.currentScore = state.score;
+      }
+
+      if (typeof state.highScore === 'number') {
+        this.scoreManager.highScore = state.highScore;
+      }
+
+      if (Array.isArray(state.hand)) {
+        this.hand = state.hand.map(name => (name ? new Piece(PIECE_SHAPES[name], name) : null));
+      } else {
+        this.hand = this.pieceGenerator.generateBatch(this.grid.getFilledPercentage());
+      }
+
+      this.isGameOver = !!state.isGameOver;
+      this.render();
+      this.updateScoreDisplay();
+      return true;
+    } catch (e) {
+      console.error('[Game] Failed to load saved state:', e);
+      return false;
+    }
+  }
+
+  clearSavedState() {
+    try {
+      localStorage.removeItem('blocklogic-save');
+    } catch (e) {
+      // ignore
+    }
   }
 
   async animateClears(clears) {
@@ -490,12 +584,9 @@ class Game {
       await this.loadLeaderboard();
       
       this.showDialog(`Score submitted! Your rank: #${data.rank}`, () => {
-        // Close game over modal and show leaderboard
+        // Close game over modal and navigate to leaderboard page
         this.hideGameOverModal();
-        const leaderboard = document.getElementById('leaderboard-container');
-        if (leaderboard) {
-          leaderboard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+        try { window.location.href = '/leaderboard'; } catch (e) { console.warn('Failed to navigate to leaderboard', e); }
       });
       
     } catch (error) {
@@ -511,6 +602,7 @@ class Game {
           ` It will sync when connection is restored.`,
           () => {
             this.hideGameOverModal();
+            try { window.location.href = '/leaderboard'; } catch (e) { console.warn('Failed to navigate to leaderboard', e); }
           }
         );
       } else {

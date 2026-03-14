@@ -6,6 +6,11 @@
 
     <header>
       <div class="header-top">
+        <NuxtLink to="/menu" class="back-button-fixed" id="back-btn" aria-label="Back to menu">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </NuxtLink>
         <img src="/img/vectorink-vectorizer-result.svg" alt="BlockLogic" class="logo">
         <div class="theme-toggle">
           <label class="toggle-switch">
@@ -33,12 +38,7 @@
         <button id="restart-btn" class="game-button">Restart Game</button>
       </div>
 
-      <aside id="leaderboard-container">
-        <h2>Leaderboard</h2>
-        <div id="leaderboard-loading" class="loading">Loading...</div>
-        <ol id="leaderboard-list" class="hidden"></ol>
-        <button id="refresh-leaderboard-btn" class="game-button">Refresh</button>
-      </aside>
+      <!-- Leaderboard moved to its own page -->
     </main>
   </div>
 
@@ -82,6 +82,7 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 const emitOnlineEvent = () => {
   window.dispatchEvent(new Event('app-online'));
@@ -89,6 +90,41 @@ const emitOnlineEvent = () => {
 
 onMounted(() => {
   window.addEventListener('online', emitOnlineEvent);
+  // Ensure game initializes when this page is mounted (handles client-side navigation)
+  try {
+    const tryInit = () => {
+      if (!window || typeof window.initBlockLogicGame !== 'function') return false;
+      try {
+        const started = window.initBlockLogicGame();
+        if (started) {
+          console.log('[Game Page] initBlockLogicGame succeeded');
+          if (typeof window.handleBlockLogicQueryActions === 'function') {
+            try { window.handleBlockLogicQueryActions(window.game); } catch (e) { console.warn('[Game Page] query handler failed', e); }
+          }
+          return true;
+        }
+      } catch (err) {
+        console.warn('[Game Page] initBlockLogicGame threw', err);
+      }
+      return false;
+    };
+
+    if (!tryInit()) {
+      // Retry a few times in case scripts or DOM are still initializing
+      let attempts = 0;
+      const maxAttempts = 15;
+      const intervalMs = 200;
+      const interval = setInterval(() => {
+        attempts += 1;
+        if (tryInit() || attempts >= maxAttempts) {
+          clearInterval(interval);
+          if (attempts >= maxAttempts) console.warn('[Game Page] initBlockLogicGame failed after retries');
+        }
+      }, intervalMs);
+    }
+  } catch (e) {
+    console.error('[Game Page] initialization error', e);
+  }
 });
 
 onBeforeUnmount(() => {
