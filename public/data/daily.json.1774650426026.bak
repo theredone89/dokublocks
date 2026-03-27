@@ -110,7 +110,7 @@
           "L_LARGE_F",
           "LINE_4_V"
         ],
-        "targetScore": 6869
+        "targetScore": 600
       }
     },
     {
@@ -223,7 +223,7 @@
           "LINE_5_V",
           "S_SHAPE"
         ],
-        "targetScore": 8469
+        "targetScore": 500
       }
     },
     {
@@ -336,7 +336,7 @@
           "LINE_3_V",
           "LINE_3_H"
         ],
-        "targetScore": 8873
+        "targetScore": 500
       }
     },
     {
@@ -449,7 +449,7 @@
           "LINE_3_V",
           "L_LARGE"
         ],
-        "targetScore": 7298
+        "targetScore": 650
       }
     },
     {
@@ -562,7 +562,7 @@
           "L_SMALL_F",
           "T_SHAPE_R"
         ],
-        "targetScore": 7661
+        "targetScore": 1000
       }
     },
     {
@@ -675,7 +675,7 @@
           "L_LARGE_FR",
           "CORNER_3X3"
         ],
-        "targetScore": 9496
+        "targetScore": 450
       }
     },
     {
@@ -788,7 +788,7 @@
           "L_LARGE_FR",
           "L_LARGE_F"
         ],
-        "targetScore": 8022
+        "targetScore": 300
       }
     },
     {
@@ -901,7 +901,7 @@
           "LINE_5_V",
           "L_LARGE_FR"
         ],
-        "targetScore": 6406
+        "targetScore": 950
       }
     },
     {
@@ -1014,7 +1014,7 @@
           "DOMINO_V",
           "L_SMALL"
         ],
-        "targetScore": 8023
+        "targetScore": 150
       }
     },
     {
@@ -1127,7 +1127,7 @@
           "LINE_3_H",
           "L_LARGE_FR"
         ],
-        "targetScore": 8814
+        "targetScore": 500
       }
     },
     {
@@ -1240,7 +1240,7 @@
           "L_LARGE",
           "SQUARE"
         ],
-        "targetScore": 7779
+        "targetScore": 600
       }
     },
     {
@@ -1353,7 +1353,7 @@
           "L_LARGE",
           "T_SHAPE_F"
         ],
-        "targetScore": 9805
+        "targetScore": 600
       }
     },
     {
@@ -1466,7 +1466,7 @@
           "LINE_5_H",
           "Z_SHAPE"
         ],
-        "targetScore": 8744
+        "targetScore": 300
       }
     },
     {
@@ -1579,7 +1579,7 @@
           "L_SMALL",
           "L_LARGE_FR"
         ],
-        "targetScore": 5644
+        "targetScore": 800
       }
     },
     {
@@ -1692,7 +1692,7 @@
           "LINE_5_V",
           "T_SHAPE_F"
         ],
-        "targetScore": 6395
+        "targetScore": 450
       }
     },
     {
@@ -1805,7 +1805,7 @@
           "LINE_4_H",
           "T_SHAPE_F"
         ],
-        "targetScore": 7405
+        "targetScore": 150
       }
     },
     {
@@ -1918,7 +1918,7 @@
           "T_SHAPE",
           "L_LARGE_FR"
         ],
-        "targetScore": 8026
+        "targetScore": 500
       }
     },
     {
@@ -2031,7 +2031,7 @@
           "LINE_4_V",
           "S_SHAPE"
         ],
-        "targetScore": 9717
+        "targetScore": 500
       }
     },
     {
@@ -2144,7 +2144,7 @@
           "L_SMALL_R",
           "LINE_4_H"
         ],
-        "targetScore": 6495
+        "targetScore": 600
       }
     },
     {
@@ -2257,7 +2257,7 @@
           "SQUARE",
           "LINE_5_H"
         ],
-        "targetScore": 8607
+        "targetScore": 250
       }
     },
     {
@@ -2370,7 +2370,7 @@
           "L_SMALL_FR",
           "DOT"
         ],
-        "targetScore": 5832
+        "targetScore": 500
       }
     },
     {
@@ -2483,7 +2483,7 @@
           "L_SMALL",
           "CORNER_3X3_R"
         ],
-        "targetScore": 6940
+        "targetScore": 750
       }
     },
     {
@@ -2596,7 +2596,7 @@
           "SQUARE",
           "LINE_5_V"
         ],
-        "targetScore": 8154
+        "targetScore": 450
       }
     },
     {
@@ -2709,7 +2709,7 @@
           "LINE_5_V",
           "Z_SHAPE"
         ],
-        "targetScore": 9000
+        "targetScore": 700
       }
     },
     {
@@ -2822,7 +2822,7 @@
           "SQUARE",
           "SQUARE"
         ],
-        "targetScore": 8852
+        "targetScore": 400
       }
     },
     {
@@ -2935,7 +2935,7 @@
           "L_LARGE_R",
           "L_LARGE_F"
         ],
-        "targetScore": 7217
+        "targetScore": 700
       }
     },
     {
@@ -3048,7 +3048,7 @@
           "T_SHAPE",
           "LINE_3_V"
         ],
-        "targetScore": 9439
+        "targetScore": 850
       }
     },
     {
@@ -3161,7 +3161,7 @@
           "T_SHAPE_L",
           "SQUARE"
         ],
-        "targetScore": 7456
+        "targetScore": 150
       }
     },
     {
@@ -3274,7 +3274,7 @@
           "T_SHAPE_L",
           "L_LARGE_F"
         ],
-        "targetScore": 5535
+        "targetScore": 1000
       }
     },
     {
@@ -3387,7 +3387,7 @@
           "DOMINO_V",
           "DOMINO_H"
         ],
-        "targetScore": 8980
+        "targetScore": 500
       }
     },
     {
@@ -3500,7 +3500,7 @@
           "L_LARGE",
           "T_SHAPE_F"
         ],
-        "targetScore": 9807
+        "targetScore": 650
       }
     },
     {
@@ -3613,7 +3613,7 @@
           "L_LARGE_R",
           "L_SMALL_R"
         ],
-        "targetScore": 6966
+        "targetScore": 500
       }
     },
     {
@@ -3726,7 +3726,7 @@
           "S_SHAPE",
           "LINE_4_H"
         ],
-        "targetScore": 6414
+        "targetScore": 450
       }
     },
     {
@@ -3839,7 +3839,7 @@
           "L_LARGE_F",
           "L_SMALL_FR"
         ],
-        "targetScore": 7187
+        "targetScore": 450
       }
     },
     {
@@ -3952,7 +3952,7 @@
           "DOMINO_V",
           "LINE_4_V"
         ],
-        "targetScore": 9683
+        "targetScore": 800
       }
     },
     {
@@ -4065,7 +4065,7 @@
           "L_LARGE_FR",
           "LINE_5_V"
         ],
-        "targetScore": 7415
+        "targetScore": 400
       }
     },
     {
@@ -4178,7 +4178,7 @@
           "PLUS",
           "PLUS"
         ],
-        "targetScore": 7477
+        "targetScore": 300
       }
     },
     {
@@ -4291,7 +4291,7 @@
           "LINE_3_H",
           "T_SHAPE_L"
         ],
-        "targetScore": 8542
+        "targetScore": 800
       }
     },
     {
@@ -4404,7 +4404,7 @@
           "LINE_5_V",
           "DOMINO_V"
         ],
-        "targetScore": 5919
+        "targetScore": 200
       }
     },
     {
@@ -4517,7 +4517,7 @@
           "DOT",
           "T_SHAPE"
         ],
-        "targetScore": 9949
+        "targetScore": 200
       }
     },
     {
@@ -4630,7 +4630,7 @@
           "L_SMALL_R",
           "PLUS"
         ],
-        "targetScore": 5358
+        "targetScore": 850
       }
     },
     {
@@ -4743,7 +4743,7 @@
           "LINE_3_H",
           "T_SHAPE_L"
         ],
-        "targetScore": 5699
+        "targetScore": 150
       }
     },
     {
@@ -4856,7 +4856,7 @@
           "CORNER_3X3_R",
           "CORNER_3X3_R"
         ],
-        "targetScore": 8907
+        "targetScore": 1050
       }
     },
     {
@@ -4969,7 +4969,7 @@
           "PLUS",
           "DOMINO_V"
         ],
-        "targetScore": 8406
+        "targetScore": 350
       }
     },
     {
@@ -5082,7 +5082,7 @@
           "CORNER_3X3",
           "LINE_4_V"
         ],
-        "targetScore": 7450
+        "targetScore": 650
       }
     },
     {
@@ -5195,7 +5195,7 @@
           "LINE_4_H",
           "T_SHAPE"
         ],
-        "targetScore": 6531
+        "targetScore": 500
       }
     },
     {
@@ -5308,7 +5308,7 @@
           "L_LARGE_F",
           "L_SMALL"
         ],
-        "targetScore": 9395
+        "targetScore": 400
       }
     },
     {
@@ -5421,7 +5421,7 @@
           "L_SMALL_F",
           "L_LARGE"
         ],
-        "targetScore": 9331
+        "targetScore": 650
       }
     },
     {
@@ -5534,7 +5534,7 @@
           "L_SMALL_F",
           "LINE_4_H"
         ],
-        "targetScore": 9850
+        "targetScore": 100
       }
     },
     {
@@ -5647,7 +5647,7 @@
           "T_SHAPE_R",
           "L_SMALL_R"
         ],
-        "targetScore": 7691
+        "targetScore": 650
       }
     },
     {
@@ -5760,7 +5760,7 @@
           "LINE_5_H",
           "L_LARGE_R"
         ],
-        "targetScore": 6618
+        "targetScore": 400
       }
     },
     {
@@ -5873,7 +5873,7 @@
           "T_SHAPE_R",
           "LINE_4_V"
         ],
-        "targetScore": 7137
+        "targetScore": 600
       }
     },
     {
@@ -5986,7 +5986,7 @@
           "PLUS",
           "L_SMALL_F"
         ],
-        "targetScore": 9331
+        "targetScore": 350
       }
     },
     {
@@ -6099,7 +6099,7 @@
           "PLUS",
           "T_SHAPE_F"
         ],
-        "targetScore": 9976
+        "targetScore": 700
       }
     },
     {
@@ -6212,7 +6212,7 @@
           "L_SMALL_F",
           "T_SHAPE_R"
         ],
-        "targetScore": 7878
+        "targetScore": 650
       }
     },
     {
@@ -6325,7 +6325,7 @@
           "L_LARGE_F",
           "L_SMALL_R"
         ],
-        "targetScore": 5657
+        "targetScore": 250
       }
     },
     {
@@ -6438,7 +6438,7 @@
           "CORNER_3X3",
           "LINE_4_V"
         ],
-        "targetScore": 5489
+        "targetScore": 550
       }
     },
     {
@@ -6551,7 +6551,7 @@
           "LINE_5_V",
           "L_LARGE_FR"
         ],
-        "targetScore": 5927
+        "targetScore": 850
       }
     },
     {
@@ -6664,7 +6664,7 @@
           "DOMINO_V",
           "CORNER_3X3_R"
         ],
-        "targetScore": 7532
+        "targetScore": 150
       }
     },
     {
@@ -6777,7 +6777,7 @@
           "Z_SHAPE",
           "S_SHAPE"
         ],
-        "targetScore": 9316
+        "targetScore": 500
       }
     },
     {
@@ -6890,7 +6890,7 @@
           "DOMINO_V",
           "LINE_4_V"
         ],
-        "targetScore": 9316
+        "targetScore": 450
       }
     },
     {
@@ -7003,7 +7003,7 @@
           "DOMINO_V",
           "T_SHAPE"
         ],
-        "targetScore": 10012
+        "targetScore": 550
       }
     },
     {
@@ -7116,7 +7116,7 @@
           "SQUARE",
           "T_SHAPE_L"
         ],
-        "targetScore": 8264
+        "targetScore": 900
       }
     },
     {
@@ -7229,7 +7229,7 @@
           "LINE_3_V",
           "L_SMALL"
         ],
-        "targetScore": 8514
+        "targetScore": 800
       }
     },
     {
@@ -7342,7 +7342,7 @@
           "PLUS",
           "CORNER_3X3_R"
         ],
-        "targetScore": 5261
+        "targetScore": 50
       }
     },
     {
@@ -7455,7 +7455,7 @@
           "CORNER_3X3_R",
           "Z_SHAPE"
         ],
-        "targetScore": 8385
+        "targetScore": 500
       }
     },
     {
@@ -7568,7 +7568,7 @@
           "T_SHAPE_L",
           "S_SHAPE"
         ],
-        "targetScore": 7835
+        "targetScore": 400
       }
     },
     {
@@ -7681,7 +7681,7 @@
           "L_LARGE",
           "DOT"
         ],
-        "targetScore": 8600
+        "targetScore": 500
       }
     },
     {
@@ -7794,7 +7794,7 @@
           "T_SHAPE_L",
           "CORNER_3X3"
         ],
-        "targetScore": 9893
+        "targetScore": 600
       }
     },
     {
@@ -7907,7 +7907,7 @@
           "T_SHAPE",
           "DOT"
         ],
-        "targetScore": 7545
+        "targetScore": 500
       }
     },
     {
@@ -8020,7 +8020,7 @@
           "L_SMALL_FR",
           "T_SHAPE_L"
         ],
-        "targetScore": 6406
+        "targetScore": 700
       }
     },
     {
@@ -8133,7 +8133,7 @@
           "L_SMALL_R",
           "L_LARGE_F"
         ],
-        "targetScore": 7233
+        "targetScore": 550
       }
     },
     {
@@ -8246,7 +8246,7 @@
           "CORNER_3X3_R",
           "T_SHAPE_F"
         ],
-        "targetScore": 6615
+        "targetScore": 700
       }
     },
     {
@@ -8359,7 +8359,7 @@
           "LINE_5_H",
           "LINE_4_H"
         ],
-        "targetScore": 6080
+        "targetScore": 800
       }
     },
     {
@@ -8472,7 +8472,7 @@
           "CORNER_3X3_R",
           "T_SHAPE_F"
         ],
-        "targetScore": 6311
+        "targetScore": 600
       }
     },
     {
@@ -8585,7 +8585,7 @@
           "T_SHAPE",
           "Z_SHAPE"
         ],
-        "targetScore": 8410
+        "targetScore": 700
       }
     },
     {
@@ -8698,7 +8698,7 @@
           "T_SHAPE_R",
           "LINE_3_V"
         ],
-        "targetScore": 8808
+        "targetScore": 650
       }
     },
     {
@@ -8811,7 +8811,7 @@
           "CORNER_3X3",
           "T_SHAPE_F"
         ],
-        "targetScore": 6704
+        "targetScore": 450
       }
     },
     {
@@ -8924,7 +8924,7 @@
           "LINE_5_V",
           "DOT"
         ],
-        "targetScore": 9848
+        "targetScore": 850
       }
     },
     {
@@ -9037,7 +9037,7 @@
           "L_LARGE",
           "L_LARGE"
         ],
-        "targetScore": 9442
+        "targetScore": 600
       }
     },
     {
@@ -9150,7 +9150,7 @@
           "T_SHAPE_F",
           "L_SMALL_FR"
         ],
-        "targetScore": 6203
+        "targetScore": 650
       }
     },
     {
@@ -9263,7 +9263,7 @@
           "LINE_4_H",
           "CORNER_3X3"
         ],
-        "targetScore": 8003
+        "targetScore": 800
       }
     },
     {
@@ -9376,7 +9376,7 @@
           "L_LARGE_FR",
           "L_SMALL_F"
         ],
-        "targetScore": 9319
+        "targetScore": 700
       }
     },
     {
@@ -9489,12 +9489,12 @@
           "L_SMALL_F",
           "DOMINO_H"
         ],
-        "targetScore": 5618
+        "targetScore": 450
       }
     },
     {
       "id": "20260326",
-      "date": "2026-03-26",
+      "date": "2026-03-27",
       "challenge": {
         "grid": [
           [
@@ -9602,12 +9602,12 @@
           "LINE_3_H",
           "SQUARE"
         ],
-        "targetScore": 5352
+        "targetScore": 500
       }
     },
     {
       "id": "20260327",
-      "date": "2026-03-27",
+      "date": "2026-03-28",
       "challenge": {
         "grid": [
           [
@@ -9710,12 +9710,7 @@
             0
           ]
         ],
-        "hand": [
-          "SQUARE",
-          "LINE_3_V",
-          "LINE_3_H"
-        ],
-        "targetScore": 6076
+        "targetScore": 1000
       }
     },
     {
@@ -9828,7 +9823,7 @@
           "LINE_4_V",
           "DOT"
         ],
-        "targetScore": 7493
+        "targetScore": 550
       }
     },
     {
@@ -9941,7 +9936,7 @@
           "DOMINO_V",
           "LINE_3_H"
         ],
-        "targetScore": 8844
+        "targetScore": 300
       }
     },
     {
@@ -10054,7 +10049,7 @@
           "L_LARGE_F",
           "LINE_4_H"
         ],
-        "targetScore": 8099
+        "targetScore": 200
       }
     },
     {
@@ -10167,7 +10162,7 @@
           "T_SHAPE_L",
           "CORNER_3X3"
         ],
-        "targetScore": 8348
+        "targetScore": 400
       }
     },
     {
@@ -10280,7 +10275,7 @@
           "DOMINO_V",
           "L_LARGE_F"
         ],
-        "targetScore": 5579
+        "targetScore": 1100
       }
     },
     {
@@ -10393,7 +10388,7 @@
           "L_SMALL",
           "L_SMALL_R"
         ],
-        "targetScore": 8757
+        "targetScore": 300
       }
     },
     {
@@ -10506,7 +10501,7 @@
           "LINE_3_H",
           "LINE_4_V"
         ],
-        "targetScore": 8635
+        "targetScore": 450
       }
     },
     {
@@ -10619,7 +10614,7 @@
           "DOMINO_V",
           "L_SMALL_FR"
         ],
-        "targetScore": 9765
+        "targetScore": 650
       }
     },
     {
@@ -10732,7 +10727,7 @@
           "DOMINO_V",
           "L_SMALL_FR"
         ],
-        "targetScore": 9131
+        "targetScore": 600
       }
     },
     {
@@ -10845,7 +10840,7 @@
           "L_LARGE_F",
           "L_SMALL_FR"
         ],
-        "targetScore": 5688
+        "targetScore": 550
       }
     },
     {
@@ -10958,7 +10953,7 @@
           "LINE_3_V",
           "DOMINO_V"
         ],
-        "targetScore": 7823
+        "targetScore": 350
       }
     },
     {
@@ -11071,7 +11066,7 @@
           "CORNER_3X3_R",
           "DOMINO_V"
         ],
-        "targetScore": 5350
+        "targetScore": 150
       }
     },
     {
@@ -11184,7 +11179,7 @@
           "CORNER_3X3",
           "L_SMALL_R"
         ],
-        "targetScore": 6980
+        "targetScore": 350
       }
     },
     {
@@ -11297,7 +11292,7 @@
           "PLUS",
           "T_SHAPE_R"
         ],
-        "targetScore": 8701
+        "targetScore": 600
       }
     },
     {
@@ -11410,7 +11405,7 @@
           "Z_SHAPE",
           "T_SHAPE"
         ],
-        "targetScore": 9818
+        "targetScore": 650
       }
     },
     {
@@ -11523,7 +11518,7 @@
           "LINE_3_V",
           "LINE_3_V"
         ],
-        "targetScore": 7708
+        "targetScore": 200
       }
     },
     {
@@ -11636,7 +11631,7 @@
           "DOT",
           "T_SHAPE"
         ],
-        "targetScore": 8418
+        "targetScore": 100
       }
     },
     {
@@ -11749,7 +11744,7 @@
           "T_SHAPE",
           "CORNER_3X3_R"
         ],
-        "targetScore": 9006
+        "targetScore": 150
       }
     },
     {
@@ -11862,7 +11857,7 @@
           "LINE_5_V",
           "T_SHAPE_R"
         ],
-        "targetScore": 10071
+        "targetScore": 600
       }
     },
     {
@@ -11975,7 +11970,7 @@
           "L_SMALL",
           "S_SHAPE"
         ],
-        "targetScore": 9012
+        "targetScore": 800
       }
     },
     {
@@ -12088,7 +12083,7 @@
           "T_SHAPE_L",
           "PLUS"
         ],
-        "targetScore": 6655
+        "targetScore": 300
       }
     },
     {
@@ -12201,7 +12196,7 @@
           "SQUARE",
           "LINE_4_V"
         ],
-        "targetScore": 8100
+        "targetScore": 550
       }
     },
     {
@@ -12314,7 +12309,7 @@
           "L_LARGE_F",
           "CORNER_3X3_R"
         ],
-        "targetScore": 6744
+        "targetScore": 600
       }
     },
     {
@@ -12427,7 +12422,7 @@
           "LINE_3_H",
           "LINE_4_H"
         ],
-        "targetScore": 8550
+        "targetScore": 750
       }
     },
     {
@@ -12540,7 +12535,7 @@
           "LINE_4_H",
           "L_LARGE"
         ],
-        "targetScore": 5597
+        "targetScore": 900
       }
     },
     {
@@ -12653,7 +12648,7 @@
           "L_SMALL_F",
           "Z_SHAPE"
         ],
-        "targetScore": 6678
+        "targetScore": 400
       }
     },
     {
@@ -12766,7 +12761,7 @@
           "T_SHAPE_L",
           "T_SHAPE_R"
         ],
-        "targetScore": 10198
+        "targetScore": 700
       }
     },
     {
@@ -12879,7 +12874,7 @@
           "DOT",
           "Z_SHAPE"
         ],
-        "targetScore": 7738
+        "targetScore": 400
       }
     },
     {
@@ -12992,7 +12987,7 @@
           "DOMINO_H",
           "LINE_5_H"
         ],
-        "targetScore": 7637
+        "targetScore": 250
       }
     },
     {
@@ -13105,7 +13100,7 @@
           "LINE_3_H",
           "L_LARGE_FR"
         ],
-        "targetScore": 7148
+        "targetScore": 450
       }
     },
     {
@@ -13218,7 +13213,7 @@
           "L_LARGE",
           "L_SMALL_F"
         ],
-        "targetScore": 9164
+        "targetScore": 350
       }
     },
     {
@@ -13331,7 +13326,7 @@
           "L_SMALL_R",
           "CORNER_3X3"
         ],
-        "targetScore": 9000
+        "targetScore": 800
       }
     },
     {
@@ -13444,7 +13439,7 @@
           "L_SMALL_FR",
           "DOT"
         ],
-        "targetScore": 8713
+        "targetScore": 250
       }
     },
     {
@@ -13557,7 +13552,7 @@
           "LINE_3_V",
           "T_SHAPE_R"
         ],
-        "targetScore": 10117
+        "targetScore": 750
       }
     },
     {
@@ -13670,7 +13665,7 @@
           "LINE_4_V",
           "LINE_4_V"
         ],
-        "targetScore": 7092
+        "targetScore": 400
       }
     },
     {
@@ -13783,7 +13778,7 @@
           "T_SHAPE_F",
           "T_SHAPE_F"
         ],
-        "targetScore": 8519
+        "targetScore": 650
       }
     },
     {
@@ -13896,7 +13891,7 @@
           "LINE_3_H",
           "LINE_3_H"
         ],
-        "targetScore": 9357
+        "targetScore": 100
       }
     },
     {
@@ -14009,7 +14004,7 @@
           "L_SMALL_FR",
           "T_SHAPE"
         ],
-        "targetScore": 5847
+        "targetScore": 450
       }
     },
     {
@@ -14122,7 +14117,7 @@
           "L_LARGE_F",
           "SQUARE"
         ],
-        "targetScore": 5606
+        "targetScore": 450
       }
     },
     {
@@ -14235,7 +14230,7 @@
           "L_SMALL_F",
           "L_SMALL"
         ],
-        "targetScore": 6808
+        "targetScore": 550
       }
     },
     {
@@ -14348,7 +14343,7 @@
           "DOT",
           "T_SHAPE_F"
         ],
-        "targetScore": 8600
+        "targetScore": 950
       }
     },
     {
@@ -14461,7 +14456,7 @@
           "T_SHAPE",
           "LINE_3_V"
         ],
-        "targetScore": 6013
+        "targetScore": 300
       }
     },
     {
@@ -14574,7 +14569,7 @@
           "L_LARGE_R",
           "LINE_5_V"
         ],
-        "targetScore": 7153
+        "targetScore": 250
       }
     },
     {
@@ -14687,7 +14682,7 @@
           "L_LARGE",
           "T_SHAPE_R"
         ],
-        "targetScore": 9855
+        "targetScore": 150
       }
     },
     {
@@ -14800,7 +14795,7 @@
           "S_SHAPE",
           "L_LARGE_F"
         ],
-        "targetScore": 7700
+        "targetScore": 800
       }
     },
     {
@@ -14913,7 +14908,7 @@
           "T_SHAPE",
           "DOT"
         ],
-        "targetScore": 5235
+        "targetScore": 550
       }
     },
     {
@@ -15026,7 +15021,7 @@
           "LINE_3_V",
           "Z_SHAPE"
         ],
-        "targetScore": 7318
+        "targetScore": 750
       }
     },
     {
@@ -15139,7 +15134,7 @@
           "LINE_5_V",
           "T_SHAPE_F"
         ],
-        "targetScore": 7794
+        "targetScore": 1150
       }
     },
     {
@@ -15252,7 +15247,7 @@
           "LINE_3_V",
           "L_LARGE_FR"
         ],
-        "targetScore": 5831
+        "targetScore": 400
       }
     },
     {
@@ -15365,7 +15360,7 @@
           "T_SHAPE_F",
           "DOMINO_V"
         ],
-        "targetScore": 8430
+        "targetScore": 500
       }
     },
     {
@@ -15478,7 +15473,7 @@
           "S_SHAPE",
           "L_LARGE_FR"
         ],
-        "targetScore": 5475
+        "targetScore": 550
       }
     },
     {
@@ -15591,7 +15586,7 @@
           "LINE_5_H",
           "LINE_5_H"
         ],
-        "targetScore": 9082
+        "targetScore": 350
       }
     },
     {
@@ -15704,7 +15699,7 @@
           "L_LARGE",
           "L_LARGE_F"
         ],
-        "targetScore": 8462
+        "targetScore": 700
       }
     },
     {
@@ -15817,7 +15812,7 @@
           "DOMINO_H",
           "SQUARE"
         ],
-        "targetScore": 5399
+        "targetScore": 600
       }
     },
     {
@@ -15930,7 +15925,7 @@
           "L_SMALL_FR",
           "L_SMALL"
         ],
-        "targetScore": 8805
+        "targetScore": 500
       }
     },
     {
@@ -16043,7 +16038,7 @@
           "LINE_3_H",
           "DOMINO_H"
         ],
-        "targetScore": 8068
+        "targetScore": 450
       }
     },
     {
@@ -16156,7 +16151,7 @@
           "LINE_3_V",
           "L_SMALL_F"
         ],
-        "targetScore": 6706
+        "targetScore": 150
       }
     },
     {
@@ -16269,7 +16264,7 @@
           "L_SMALL_FR",
           "L_SMALL_R"
         ],
-        "targetScore": 6160
+        "targetScore": 700
       }
     },
     {
@@ -16382,7 +16377,7 @@
           "L_LARGE_FR",
           "LINE_3_H"
         ],
-        "targetScore": 5637
+        "targetScore": 300
       }
     },
     {
@@ -16495,7 +16490,7 @@
           "Z_SHAPE",
           "L_SMALL_F"
         ],
-        "targetScore": 5259
+        "targetScore": 150
       }
     },
     {
@@ -16608,7 +16603,7 @@
           "LINE_4_H",
           "CORNER_3X3_R"
         ],
-        "targetScore": 6506
+        "targetScore": 450
       }
     },
     {
@@ -16721,7 +16716,7 @@
           "LINE_4_H",
           "T_SHAPE"
         ],
-        "targetScore": 8419
+        "targetScore": 450
       }
     },
     {
@@ -16834,7 +16829,7 @@
           "L_SMALL_FR",
           "LINE_3_V"
         ],
-        "targetScore": 5326
+        "targetScore": 300
       }
     },
     {
@@ -16947,7 +16942,7 @@
           "L_LARGE_R",
           "Z_SHAPE"
         ],
-        "targetScore": 8032
+        "targetScore": 400
       }
     },
     {
@@ -17060,7 +17055,7 @@
           "L_LARGE_FR",
           "L_SMALL"
         ],
-        "targetScore": 9116
+        "targetScore": 350
       }
     },
     {
@@ -17173,7 +17168,7 @@
           "L_LARGE_R",
           "L_SMALL_R"
         ],
-        "targetScore": 6038
+        "targetScore": 350
       }
     },
     {
@@ -17286,7 +17281,7 @@
           "L_SMALL_FR",
           "LINE_3_H"
         ],
-        "targetScore": 9905
+        "targetScore": 450
       }
     },
     {
@@ -17399,7 +17394,7 @@
           "L_LARGE",
           "L_LARGE_F"
         ],
-        "targetScore": 9958
+        "targetScore": 700
       }
     },
     {
@@ -17512,7 +17507,7 @@
           "DOT",
           "L_SMALL_FR"
         ],
-        "targetScore": 5569
+        "targetScore": 550
       }
     },
     {
@@ -17625,7 +17620,7 @@
           "S_SHAPE",
           "LINE_5_V"
         ],
-        "targetScore": 9718
+        "targetScore": 350
       }
     },
     {
@@ -17738,7 +17733,7 @@
           "CORNER_3X3",
           "T_SHAPE_F"
         ],
-        "targetScore": 8942
+        "targetScore": 750
       }
     },
     {
@@ -17851,7 +17846,7 @@
           "CORNER_3X3_R",
           "LINE_5_V"
         ],
-        "targetScore": 8100
+        "targetScore": 900
       }
     },
     {
@@ -17964,7 +17959,7 @@
           "LINE_4_V",
           "DOMINO_H"
         ],
-        "targetScore": 5369
+        "targetScore": 450
       }
     },
     {
@@ -18077,7 +18072,7 @@
           "CORNER_3X3",
           "SQUARE"
         ],
-        "targetScore": 9512
+        "targetScore": 450
       }
     },
     {
@@ -18190,7 +18185,7 @@
           "T_SHAPE",
           "LINE_5_V"
         ],
-        "targetScore": 7300
+        "targetScore": 1000
       }
     },
     {
@@ -18303,7 +18298,7 @@
           "DOT",
           "DOMINO_H"
         ],
-        "targetScore": 6345
+        "targetScore": 350
       }
     },
     {
@@ -18416,7 +18411,7 @@
           "T_SHAPE_L",
           "T_SHAPE_R"
         ],
-        "targetScore": 7586
+        "targetScore": 400
       }
     },
     {
@@ -18529,7 +18524,7 @@
           "CORNER_3X3_R",
           "L_SMALL_FR"
         ],
-        "targetScore": 7685
+        "targetScore": 200
       }
     },
     {
@@ -18642,7 +18637,7 @@
           "CORNER_3X3_R",
           "Z_SHAPE"
         ],
-        "targetScore": 8255
+        "targetScore": 550
       }
     },
     {
@@ -18755,7 +18750,7 @@
           "T_SHAPE_F",
           "T_SHAPE"
         ],
-        "targetScore": 9620
+        "targetScore": 450
       }
     },
     {
@@ -18868,7 +18863,7 @@
           "CORNER_3X3_R",
           "L_SMALL_F"
         ],
-        "targetScore": 9888
+        "targetScore": 450
       }
     },
     {
@@ -18981,7 +18976,7 @@
           "CORNER_3X3",
           "PLUS"
         ],
-        "targetScore": 9433
+        "targetScore": 250
       }
     },
     {
@@ -19094,7 +19089,7 @@
           "LINE_4_V",
           "LINE_5_H"
         ],
-        "targetScore": 8920
+        "targetScore": 750
       }
     },
     {
@@ -19207,7 +19202,7 @@
           "T_SHAPE_F",
           "L_LARGE"
         ],
-        "targetScore": 9033
+        "targetScore": 400
       }
     },
     {
@@ -19320,7 +19315,7 @@
           "Z_SHAPE",
           "DOT"
         ],
-        "targetScore": 5512
+        "targetScore": 50
       }
     },
     {
@@ -19433,7 +19428,7 @@
           "SQUARE",
           "L_SMALL"
         ],
-        "targetScore": 8279
+        "targetScore": 500
       }
     },
     {
@@ -19546,7 +19541,7 @@
           "L_SMALL",
           "DOMINO_H"
         ],
-        "targetScore": 9235
+        "targetScore": 600
       }
     },
     {
@@ -19659,7 +19654,7 @@
           "PLUS",
           "T_SHAPE_R"
         ],
-        "targetScore": 8273
+        "targetScore": 300
       }
     },
     {
@@ -19772,7 +19767,7 @@
           "L_SMALL_F",
           "LINE_4_H"
         ],
-        "targetScore": 9776
+        "targetScore": 550
       }
     },
     {
@@ -19885,7 +19880,7 @@
           "DOT",
           "Z_SHAPE"
         ],
-        "targetScore": 9197
+        "targetScore": 300
       }
     },
     {
@@ -19998,7 +19993,7 @@
           "L_LARGE",
           "PLUS"
         ],
-        "targetScore": 9271
+        "targetScore": 850
       }
     },
     {
@@ -20111,7 +20106,7 @@
           "S_SHAPE",
           "L_SMALL"
         ],
-        "targetScore": 10001
+        "targetScore": 650
       }
     },
     {
@@ -20224,7 +20219,7 @@
           "LINE_4_V",
           "DOMINO_H"
         ],
-        "targetScore": 7466
+        "targetScore": 600
       }
     },
     {
@@ -20337,7 +20332,7 @@
           "LINE_5_H",
           "LINE_4_V"
         ],
-        "targetScore": 6784
+        "targetScore": 300
       }
     },
     {
@@ -20450,7 +20445,7 @@
           "L_LARGE_R",
           "DOMINO_H"
         ],
-        "targetScore": 6179
+        "targetScore": 750
       }
     },
     {
@@ -20563,7 +20558,7 @@
           "CORNER_3X3_R",
           "T_SHAPE_L"
         ],
-        "targetScore": 6773
+        "targetScore": 850
       }
     },
     {
@@ -20676,7 +20671,7 @@
           "L_SMALL_R",
           "CORNER_3X3_R"
         ],
-        "targetScore": 5780
+        "targetScore": 250
       }
     },
     {
@@ -20789,7 +20784,7 @@
           "PLUS",
           "S_SHAPE"
         ],
-        "targetScore": 7891
+        "targetScore": 600
       }
     },
     {
@@ -20902,7 +20897,7 @@
           "CORNER_3X3_R",
           "LINE_4_V"
         ],
-        "targetScore": 9135
+        "targetScore": 350
       }
     },
     {
@@ -21015,7 +21010,7 @@
           "L_LARGE",
           "T_SHAPE_F"
         ],
-        "targetScore": 7238
+        "targetScore": 900
       }
     },
     {
@@ -21128,7 +21123,7 @@
           "T_SHAPE_F",
           "L_LARGE_R"
         ],
-        "targetScore": 7859
+        "targetScore": 150
       }
     },
     {
@@ -21241,7 +21236,7 @@
           "S_SHAPE",
           "LINE_5_V"
         ],
-        "targetScore": 5438
+        "targetScore": 1100
       }
     },
     {
@@ -21354,7 +21349,7 @@
           "S_SHAPE",
           "L_LARGE_F"
         ],
-        "targetScore": 7315
+        "targetScore": 350
       }
     },
     {
@@ -21467,7 +21462,7 @@
           "LINE_4_H",
           "PLUS"
         ],
-        "targetScore": 6504
+        "targetScore": 350
       }
     },
     {
@@ -21580,7 +21575,7 @@
           "S_SHAPE",
           "L_LARGE_R"
         ],
-        "targetScore": 7573
+        "targetScore": 400
       }
     },
     {
@@ -21693,7 +21688,7 @@
           "LINE_3_V",
           "CORNER_3X3"
         ],
-        "targetScore": 9258
+        "targetScore": 350
       }
     },
     {
@@ -21806,7 +21801,7 @@
           "L_SMALL_FR",
           "T_SHAPE_F"
         ],
-        "targetScore": 7657
+        "targetScore": 450
       }
     },
     {
@@ -21919,7 +21914,7 @@
           "L_SMALL_FR",
           "PLUS"
         ],
-        "targetScore": 5303
+        "targetScore": 800
       }
     },
     {
@@ -22032,7 +22027,7 @@
           "LINE_4_H",
           "L_SMALL_R"
         ],
-        "targetScore": 7017
+        "targetScore": 750
       }
     },
     {
@@ -22145,7 +22140,7 @@
           "DOMINO_V",
           "CORNER_3X3"
         ],
-        "targetScore": 7842
+        "targetScore": 700
       }
     },
     {
@@ -22258,7 +22253,7 @@
           "SQUARE",
           "CORNER_3X3"
         ],
-        "targetScore": 6964
+        "targetScore": 150
       }
     },
     {
@@ -22371,7 +22366,7 @@
           "L_SMALL",
           "L_SMALL_FR"
         ],
-        "targetScore": 5640
+        "targetScore": 850
       }
     },
     {
@@ -22484,7 +22479,7 @@
           "LINE_4_H",
           "T_SHAPE_L"
         ],
-        "targetScore": 5226
+        "targetScore": 450
       }
     },
     {
@@ -22597,7 +22592,7 @@
           "L_LARGE_R",
           "PLUS"
         ],
-        "targetScore": 9492
+        "targetScore": 700
       }
     },
     {
@@ -22710,7 +22705,7 @@
           "Z_SHAPE",
           "CORNER_3X3"
         ],
-        "targetScore": 9367
+        "targetScore": 500
       }
     },
     {
@@ -22823,7 +22818,7 @@
           "DOMINO_V",
           "T_SHAPE_R"
         ],
-        "targetScore": 9541
+        "targetScore": 750
       }
     },
     {
@@ -22936,7 +22931,7 @@
           "CORNER_3X3_R",
           "DOMINO_H"
         ],
-        "targetScore": 8869
+        "targetScore": 500
       }
     },
     {
@@ -23049,7 +23044,7 @@
           "LINE_4_V",
           "T_SHAPE"
         ],
-        "targetScore": 8713
+        "targetScore": 500
       }
     },
     {
@@ -23162,7 +23157,7 @@
           "L_SMALL_FR",
           "L_LARGE_FR"
         ],
-        "targetScore": 7917
+        "targetScore": 550
       }
     },
     {
@@ -23275,7 +23270,7 @@
           "T_SHAPE_F",
           "LINE_3_V"
         ],
-        "targetScore": 9326
+        "targetScore": 450
       }
     },
     {
@@ -23388,7 +23383,7 @@
           "L_LARGE_F",
           "T_SHAPE"
         ],
-        "targetScore": 5312
+        "targetScore": 600
       }
     },
     {
@@ -23501,7 +23496,7 @@
           "L_SMALL_FR",
           "L_SMALL_R"
         ],
-        "targetScore": 5755
+        "targetScore": 450
       }
     },
     {
@@ -23614,7 +23609,7 @@
           "LINE_4_V",
           "PLUS"
         ],
-        "targetScore": 6557
+        "targetScore": 550
       }
     },
     {
@@ -23727,7 +23722,7 @@
           "DOMINO_V",
           "L_LARGE_F"
         ],
-        "targetScore": 6727
+        "targetScore": 800
       }
     },
     {
@@ -23840,7 +23835,7 @@
           "Z_SHAPE",
           "T_SHAPE_L"
         ],
-        "targetScore": 5861
+        "targetScore": 700
       }
     },
     {
@@ -23953,7 +23948,7 @@
           "LINE_3_V",
           "S_SHAPE"
         ],
-        "targetScore": 7758
+        "targetScore": 500
       }
     },
     {
@@ -24066,7 +24061,7 @@
           "SQUARE",
           "L_LARGE_FR"
         ],
-        "targetScore": 9977
+        "targetScore": 350
       }
     },
     {
@@ -24179,7 +24174,7 @@
           "T_SHAPE_F",
           "L_LARGE"
         ],
-        "targetScore": 5138
+        "targetScore": 550
       }
     },
     {
@@ -24292,7 +24287,7 @@
           "L_SMALL_R",
           "CORNER_3X3_R"
         ],
-        "targetScore": 6423
+        "targetScore": 100
       }
     },
     {
@@ -24405,7 +24400,7 @@
           "Z_SHAPE",
           "LINE_4_H"
         ],
-        "targetScore": 6668
+        "targetScore": 850
       }
     },
     {
@@ -24518,7 +24513,7 @@
           "LINE_3_V",
           "LINE_5_H"
         ],
-        "targetScore": 9486
+        "targetScore": 600
       }
     },
     {
@@ -24631,7 +24626,7 @@
           "T_SHAPE_L",
           "CORNER_3X3"
         ],
-        "targetScore": 5782
+        "targetScore": 1050
       }
     },
     {
@@ -24744,7 +24739,7 @@
           "T_SHAPE_R",
           "T_SHAPE_F"
         ],
-        "targetScore": 6892
+        "targetScore": 900
       }
     },
     {
@@ -24857,7 +24852,7 @@
           "LINE_5_H",
           "L_SMALL_R"
         ],
-        "targetScore": 9592
+        "targetScore": 350
       }
     },
     {
@@ -24970,7 +24965,7 @@
           "L_SMALL_FR",
           "T_SHAPE_L"
         ],
-        "targetScore": 7591
+        "targetScore": 1000
       }
     },
     {
@@ -25083,7 +25078,7 @@
           "S_SHAPE",
           "L_LARGE_F"
         ],
-        "targetScore": 5541
+        "targetScore": 850
       }
     },
     {
@@ -25196,7 +25191,7 @@
           "PLUS",
           "L_SMALL_FR"
         ],
-        "targetScore": 7356
+        "targetScore": 400
       }
     },
     {
@@ -25309,7 +25304,7 @@
           "L_LARGE_R",
           "PLUS"
         ],
-        "targetScore": 9620
+        "targetScore": 550
       }
     },
     {
@@ -25422,7 +25417,7 @@
           "L_LARGE",
           "Z_SHAPE"
         ],
-        "targetScore": 9664
+        "targetScore": 350
       }
     },
     {
@@ -25535,7 +25530,7 @@
           "L_SMALL",
           "L_LARGE_F"
         ],
-        "targetScore": 7438
+        "targetScore": 550
       }
     },
     {
@@ -25648,7 +25643,7 @@
           "L_LARGE_R",
           "T_SHAPE"
         ],
-        "targetScore": 9255
+        "targetScore": 500
       }
     },
     {
@@ -25761,7 +25756,7 @@
           "PLUS",
           "LINE_3_H"
         ],
-        "targetScore": 6150
+        "targetScore": 750
       }
     },
     {
@@ -25874,7 +25869,7 @@
           "T_SHAPE",
           "DOT"
         ],
-        "targetScore": 9673
+        "targetScore": 900
       }
     },
     {
@@ -25987,7 +25982,7 @@
           "DOMINO_V",
           "DOMINO_V"
         ],
-        "targetScore": 7781
+        "targetScore": 600
       }
     },
     {
@@ -26100,7 +26095,7 @@
           "L_LARGE_FR",
           "SQUARE"
         ],
-        "targetScore": 8934
+        "targetScore": 500
       }
     },
     {
@@ -26213,7 +26208,7 @@
           "LINE_4_H",
           "LINE_3_V"
         ],
-        "targetScore": 8362
+        "targetScore": 250
       }
     },
     {
@@ -26326,7 +26321,7 @@
           "CORNER_3X3_R",
           "L_SMALL"
         ],
-        "targetScore": 6909
+        "targetScore": 750
       }
     },
     {
@@ -26439,7 +26434,7 @@
           "SQUARE",
           "DOT"
         ],
-        "targetScore": 6643
+        "targetScore": 800
       }
     },
     {
@@ -26552,7 +26547,7 @@
           "LINE_4_V",
           "Z_SHAPE"
         ],
-        "targetScore": 5318
+        "targetScore": 700
       }
     },
     {
@@ -26665,7 +26660,7 @@
           "LINE_3_V",
           "DOMINO_V"
         ],
-        "targetScore": 8082
+        "targetScore": 600
       }
     },
     {
@@ -26778,7 +26773,7 @@
           "LINE_5_H",
           "SQUARE"
         ],
-        "targetScore": 5692
+        "targetScore": 100
       }
     },
     {
@@ -26891,7 +26886,7 @@
           "DOMINO_V",
           "LINE_5_H"
         ],
-        "targetScore": 9538
+        "targetScore": 450
       }
     },
     {
@@ -27004,7 +26999,7 @@
           "LINE_4_V",
           "DOT"
         ],
-        "targetScore": 9542
+        "targetScore": 300
       }
     },
     {
@@ -27117,7 +27112,7 @@
           "S_SHAPE",
           "L_LARGE_R"
         ],
-        "targetScore": 6565
+        "targetScore": 850
       }
     },
     {
@@ -27230,7 +27225,7 @@
           "DOMINO_V",
           "DOMINO_H"
         ],
-        "targetScore": 7032
+        "targetScore": 350
       }
     },
     {
@@ -27343,7 +27338,7 @@
           "DOT",
           "LINE_5_V"
         ],
-        "targetScore": 6626
+        "targetScore": 850
       }
     },
     {
@@ -27456,7 +27451,7 @@
           "Z_SHAPE",
           "T_SHAPE_L"
         ],
-        "targetScore": 8296
+        "targetScore": 500
       }
     },
     {
@@ -27569,7 +27564,7 @@
           "LINE_4_H",
           "LINE_5_V"
         ],
-        "targetScore": 9885
+        "targetScore": 1000
       }
     },
     {
@@ -27682,7 +27677,7 @@
           "Z_SHAPE",
           "LINE_4_V"
         ],
-        "targetScore": 6002
+        "targetScore": 850
       }
     },
     {
@@ -27795,7 +27790,7 @@
           "SQUARE",
           "T_SHAPE"
         ],
-        "targetScore": 7447
+        "targetScore": 450
       }
     },
     {
@@ -27908,7 +27903,7 @@
           "T_SHAPE_R",
           "LINE_3_H"
         ],
-        "targetScore": 7989
+        "targetScore": 550
       }
     },
     {
@@ -28021,7 +28016,7 @@
           "T_SHAPE",
           "L_SMALL_FR"
         ],
-        "targetScore": 8931
+        "targetScore": 600
       }
     },
     {
@@ -28134,7 +28129,7 @@
           "L_LARGE",
           "T_SHAPE_L"
         ],
-        "targetScore": 8479
+        "targetScore": 450
       }
     },
     {
@@ -28247,7 +28242,7 @@
           "LINE_3_V",
           "LINE_3_V"
         ],
-        "targetScore": 7712
+        "targetScore": 700
       }
     },
     {
@@ -28360,7 +28355,7 @@
           "CORNER_3X3",
           "L_LARGE_FR"
         ],
-        "targetScore": 6469
+        "targetScore": 750
       }
     },
     {
@@ -28473,7 +28468,7 @@
           "DOMINO_H",
           "CORNER_3X3_R"
         ],
-        "targetScore": 5816
+        "targetScore": 650
       }
     },
     {
@@ -28586,7 +28581,7 @@
           "LINE_5_V",
           "Z_SHAPE"
         ],
-        "targetScore": 6741
+        "targetScore": 550
       }
     },
     {
@@ -28699,7 +28694,7 @@
           "DOMINO_V",
           "DOMINO_V"
         ],
-        "targetScore": 5249
+        "targetScore": 700
       }
     },
     {
@@ -28812,7 +28807,7 @@
           "DOT",
           "L_SMALL_R"
         ],
-        "targetScore": 5918
+        "targetScore": 450
       }
     },
     {
@@ -28925,7 +28920,7 @@
           "DOMINO_H",
           "T_SHAPE_R"
         ],
-        "targetScore": 7315
+        "targetScore": 500
       }
     },
     {
@@ -29038,7 +29033,7 @@
           "DOMINO_V",
           "LINE_3_V"
         ],
-        "targetScore": 7226
+        "targetScore": 500
       }
     },
     {
@@ -29151,7 +29146,7 @@
           "DOMINO_V",
           "DOT"
         ],
-        "targetScore": 8313
+        "targetScore": 650
       }
     },
     {
@@ -29264,7 +29259,7 @@
           "L_LARGE_FR",
           "DOT"
         ],
-        "targetScore": 9655
+        "targetScore": 300
       }
     },
     {
@@ -29377,7 +29372,7 @@
           "CORNER_3X3",
           "T_SHAPE_R"
         ],
-        "targetScore": 7900
+        "targetScore": 300
       }
     },
     {
@@ -29490,7 +29485,7 @@
           "LINE_4_V",
           "DOMINO_V"
         ],
-        "targetScore": 6710
+        "targetScore": 100
       }
     },
     {
@@ -29603,7 +29598,7 @@
           "L_LARGE",
           "DOT"
         ],
-        "targetScore": 8855
+        "targetScore": 850
       }
     },
     {
@@ -29716,7 +29711,7 @@
           "LINE_4_V",
           "DOT"
         ],
-        "targetScore": 9897
+        "targetScore": 600
       }
     },
     {
@@ -29829,7 +29824,7 @@
           "LINE_5_V",
           "LINE_4_H"
         ],
-        "targetScore": 5249
+        "targetScore": 100
       }
     },
     {
@@ -29942,7 +29937,7 @@
           "L_LARGE",
           "PLUS"
         ],
-        "targetScore": 9748
+        "targetScore": 500
       }
     },
     {
@@ -30055,7 +30050,7 @@
           "LINE_4_H",
           "T_SHAPE_L"
         ],
-        "targetScore": 6766
+        "targetScore": 500
       }
     },
     {
@@ -30168,7 +30163,7 @@
           "T_SHAPE_L",
           "L_LARGE_FR"
         ],
-        "targetScore": 5251
+        "targetScore": 50
       }
     },
     {
@@ -30281,7 +30276,7 @@
           "PLUS",
           "T_SHAPE_L"
         ],
-        "targetScore": 5303
+        "targetScore": 450
       }
     },
     {
@@ -30394,7 +30389,7 @@
           "PLUS",
           "LINE_5_H"
         ],
-        "targetScore": 6746
+        "targetScore": 500
       }
     },
     {
@@ -30507,7 +30502,7 @@
           "T_SHAPE_L",
           "Z_SHAPE"
         ],
-        "targetScore": 8315
+        "targetScore": 550
       }
     },
     {
@@ -30620,7 +30615,7 @@
           "CORNER_3X3",
           "PLUS"
         ],
-        "targetScore": 8547
+        "targetScore": 550
       }
     },
     {
@@ -30733,7 +30728,7 @@
           "T_SHAPE_R",
           "CORNER_3X3_R"
         ],
-        "targetScore": 6852
+        "targetScore": 200
       }
     },
     {
@@ -30846,7 +30841,7 @@
           "L_SMALL_R",
           "L_LARGE_R"
         ],
-        "targetScore": 6669
+        "targetScore": 800
       }
     },
     {
@@ -30959,7 +30954,7 @@
           "LINE_3_H",
           "L_LARGE"
         ],
-        "targetScore": 8243
+        "targetScore": 600
       }
     },
     {
@@ -31072,7 +31067,7 @@
           "L_SMALL_R",
           "CORNER_3X3"
         ],
-        "targetScore": 8548
+        "targetScore": 700
       }
     },
     {
@@ -31185,7 +31180,7 @@
           "S_SHAPE",
           "DOT"
         ],
-        "targetScore": 6582
+        "targetScore": 700
       }
     },
     {
@@ -31298,7 +31293,7 @@
           "SQUARE",
           "LINE_5_H"
         ],
-        "targetScore": 7603
+        "targetScore": 700
       }
     },
     {
@@ -31411,7 +31406,7 @@
           "DOMINO_V",
           "T_SHAPE_F"
         ],
-        "targetScore": 9345
+        "targetScore": 950
       }
     },
     {
@@ -31524,7 +31519,7 @@
           "LINE_5_V",
           "S_SHAPE"
         ],
-        "targetScore": 6730
+        "targetScore": 200
       }
     },
     {
@@ -31637,7 +31632,7 @@
           "DOMINO_V",
           "LINE_3_H"
         ],
-        "targetScore": 5128
+        "targetScore": 400
       }
     },
     {
@@ -31750,7 +31745,7 @@
           "DOT",
           "T_SHAPE_L"
         ],
-        "targetScore": 8962
+        "targetScore": 350
       }
     },
     {
@@ -31863,7 +31858,7 @@
           "LINE_4_V",
           "SQUARE"
         ],
-        "targetScore": 8530
+        "targetScore": 450
       }
     },
     {
@@ -31976,7 +31971,7 @@
           "DOT",
           "LINE_3_V"
         ],
-        "targetScore": 9532
+        "targetScore": 350
       }
     },
     {
@@ -32089,7 +32084,7 @@
           "LINE_5_H",
           "T_SHAPE"
         ],
-        "targetScore": 7925
+        "targetScore": 650
       }
     },
     {
@@ -32202,7 +32197,7 @@
           "T_SHAPE",
           "Z_SHAPE"
         ],
-        "targetScore": 7877
+        "targetScore": 500
       }
     },
     {
@@ -32315,7 +32310,7 @@
           "DOMINO_V",
           "L_LARGE_FR"
         ],
-        "targetScore": 5970
+        "targetScore": 1000
       }
     },
     {
@@ -32428,7 +32423,7 @@
           "T_SHAPE_R",
           "L_SMALL_FR"
         ],
-        "targetScore": 7262
+        "targetScore": 750
       }
     },
     {
@@ -32541,7 +32536,7 @@
           "CORNER_3X3",
           "L_SMALL_FR"
         ],
-        "targetScore": 5993
+        "targetScore": 300
       }
     },
     {
@@ -32654,7 +32649,7 @@
           "L_SMALL_F",
           "T_SHAPE"
         ],
-        "targetScore": 5776
+        "targetScore": 300
       }
     },
     {
@@ -32767,7 +32762,7 @@
           "LINE_3_H",
           "DOT"
         ],
-        "targetScore": 5883
+        "targetScore": 750
       }
     },
     {
@@ -32880,7 +32875,7 @@
           "L_LARGE",
           "T_SHAPE_L"
         ],
-        "targetScore": 5733
+        "targetScore": 500
       }
     },
     {
@@ -32993,7 +32988,7 @@
           "L_LARGE_R",
           "LINE_3_V"
         ],
-        "targetScore": 8410
+        "targetScore": 400
       }
     },
     {
@@ -33106,7 +33101,7 @@
           "LINE_4_H",
           "L_SMALL_F"
         ],
-        "targetScore": 9821
+        "targetScore": 500
       }
     },
     {
@@ -33219,7 +33214,7 @@
           "L_LARGE_R",
           "L_SMALL_F"
         ],
-        "targetScore": 7753
+        "targetScore": 600
       }
     },
     {
@@ -33332,7 +33327,7 @@
           "L_SMALL_FR",
           "LINE_5_V"
         ],
-        "targetScore": 6578
+        "targetScore": 850
       }
     },
     {
@@ -33445,7 +33440,7 @@
           "CORNER_3X3_R",
           "T_SHAPE_R"
         ],
-        "targetScore": 6871
+        "targetScore": 250
       }
     },
     {
@@ -33558,7 +33553,7 @@
           "LINE_3_H",
           "L_SMALL_F"
         ],
-        "targetScore": 8600
+        "targetScore": 400
       }
     },
     {
@@ -33671,7 +33666,7 @@
           "L_SMALL_FR",
           "S_SHAPE"
         ],
-        "targetScore": 6640
+        "targetScore": 300
       }
     },
     {
@@ -33784,7 +33779,7 @@
           "S_SHAPE",
           "LINE_5_H"
         ],
-        "targetScore": 6440
+        "targetScore": 900
       }
     },
     {
@@ -33897,7 +33892,7 @@
           "L_LARGE_FR",
           "Z_SHAPE"
         ],
-        "targetScore": 6820
+        "targetScore": 400
       }
     },
     {
@@ -34010,7 +34005,7 @@
           "LINE_5_V",
           "T_SHAPE_L"
         ],
-        "targetScore": 9565
+        "targetScore": 400
       }
     },
     {
@@ -34123,7 +34118,7 @@
           "DOMINO_H",
           "L_SMALL_F"
         ],
-        "targetScore": 6701
+        "targetScore": 700
       }
     },
     {
@@ -34236,7 +34231,7 @@
           "L_LARGE_FR",
           "LINE_5_H"
         ],
-        "targetScore": 8410
+        "targetScore": 550
       }
     },
     {
@@ -34349,7 +34344,7 @@
           "T_SHAPE_L",
           "L_SMALL_R"
         ],
-        "targetScore": 9888
+        "targetScore": 650
       }
     },
     {
@@ -34462,7 +34457,7 @@
           "L_SMALL",
           "LINE_4_H"
         ],
-        "targetScore": 6652
+        "targetScore": 1000
       }
     },
     {
@@ -34575,7 +34570,7 @@
           "PLUS",
           "DOMINO_V"
         ],
-        "targetScore": 7906
+        "targetScore": 850
       }
     },
     {
@@ -34688,7 +34683,7 @@
           "L_SMALL_FR",
           "PLUS"
         ],
-        "targetScore": 8420
+        "targetScore": 300
       }
     },
     {
@@ -34801,7 +34796,7 @@
           "L_LARGE_FR",
           "SQUARE"
         ],
-        "targetScore": 7000
+        "targetScore": 800
       }
     },
     {
@@ -34914,7 +34909,7 @@
           "LINE_5_V",
           "L_LARGE_R"
         ],
-        "targetScore": 8486
+        "targetScore": 200
       }
     },
     {
@@ -35027,7 +35022,7 @@
           "L_LARGE_FR",
           "DOMINO_H"
         ],
-        "targetScore": 6456
+        "targetScore": 250
       }
     },
     {
@@ -35140,7 +35135,7 @@
           "L_LARGE_R",
           "T_SHAPE_F"
         ],
-        "targetScore": 5576
+        "targetScore": 600
       }
     },
     {
@@ -35253,7 +35248,7 @@
           "T_SHAPE_L",
           "L_LARGE"
         ],
-        "targetScore": 7230
+        "targetScore": 750
       }
     },
     {
@@ -35366,7 +35361,7 @@
           "DOT",
           "L_SMALL_FR"
         ],
-        "targetScore": 9239
+        "targetScore": 400
       }
     },
     {
@@ -35479,7 +35474,7 @@
           "LINE_5_V",
           "T_SHAPE_F"
         ],
-        "targetScore": 9160
+        "targetScore": 50
       }
     },
     {
@@ -35592,7 +35587,7 @@
           "L_SMALL_FR",
           "DOMINO_H"
         ],
-        "targetScore": 6825
+        "targetScore": 150
       }
     },
     {
@@ -35705,7 +35700,7 @@
           "DOT",
           "LINE_5_H"
         ],
-        "targetScore": 5209
+        "targetScore": 450
       }
     },
     {
@@ -35818,7 +35813,7 @@
           "CORNER_3X3",
           "LINE_3_V"
         ],
-        "targetScore": 5807
+        "targetScore": 450
       }
     },
     {
@@ -35931,7 +35926,7 @@
           "LINE_3_H",
           "LINE_4_H"
         ],
-        "targetScore": 8983
+        "targetScore": 200
       }
     },
     {
@@ -36044,7 +36039,7 @@
           "DOMINO_V",
           "L_LARGE_F"
         ],
-        "targetScore": 6258
+        "targetScore": 550
       }
     },
     {
@@ -36157,7 +36152,7 @@
           "DOMINO_H",
           "L_LARGE_FR"
         ],
-        "targetScore": 6182
+        "targetScore": 450
       }
     },
     {
@@ -36270,7 +36265,7 @@
           "T_SHAPE_L",
           "CORNER_3X3_R"
         ],
-        "targetScore": 6694
+        "targetScore": 500
       }
     },
     {
@@ -36383,7 +36378,7 @@
           "DOMINO_H",
           "L_SMALL_FR"
         ],
-        "targetScore": 9828
+        "targetScore": 200
       }
     },
     {
@@ -36496,7 +36491,7 @@
           "DOMINO_H",
           "L_SMALL_FR"
         ],
-        "targetScore": 9837
+        "targetScore": 700
       }
     },
     {
@@ -36609,7 +36604,7 @@
           "CORNER_3X3",
           "CORNER_3X3"
         ],
-        "targetScore": 7001
+        "targetScore": 500
       }
     },
     {
@@ -36722,7 +36717,7 @@
           "CORNER_3X3",
           "DOMINO_H"
         ],
-        "targetScore": 9338
+        "targetScore": 450
       }
     },
     {
@@ -36835,7 +36830,7 @@
           "LINE_4_V",
           "L_SMALL_FR"
         ],
-        "targetScore": 5735
+        "targetScore": 100
       }
     },
     {
@@ -36948,7 +36943,7 @@
           "LINE_5_V",
           "L_LARGE"
         ],
-        "targetScore": 6952
+        "targetScore": 300
       }
     },
     {
@@ -37061,7 +37056,7 @@
           "DOMINO_V",
           "S_SHAPE"
         ],
-        "targetScore": 6010
+        "targetScore": 250
       }
     },
     {
@@ -37174,7 +37169,7 @@
           "CORNER_3X3_R",
           "L_LARGE"
         ],
-        "targetScore": 7851
+        "targetScore": 950
       }
     },
     {
@@ -37287,7 +37282,7 @@
           "L_LARGE_R",
           "CORNER_3X3"
         ],
-        "targetScore": 9260
+        "targetScore": 450
       }
     },
     {
@@ -37400,7 +37395,7 @@
           "DOT",
           "DOMINO_H"
         ],
-        "targetScore": 8053
+        "targetScore": 650
       }
     },
     {
@@ -37513,7 +37508,7 @@
           "T_SHAPE",
           "T_SHAPE_L"
         ],
-        "targetScore": 7224
+        "targetScore": 400
       }
     },
     {
@@ -37626,7 +37621,7 @@
           "DOT",
           "S_SHAPE"
         ],
-        "targetScore": 9496
+        "targetScore": 550
       }
     },
     {
@@ -37739,7 +37734,7 @@
           "LINE_3_H",
           "L_LARGE_FR"
         ],
-        "targetScore": 6793
+        "targetScore": 150
       }
     },
     {
@@ -37852,7 +37847,7 @@
           "L_SMALL_R",
           "L_SMALL_F"
         ],
-        "targetScore": 7872
+        "targetScore": 150
       }
     },
     {
@@ -37965,7 +37960,7 @@
           "L_LARGE",
           "S_SHAPE"
         ],
-        "targetScore": 6451
+        "targetScore": 650
       }
     },
     {
@@ -38078,7 +38073,7 @@
           "L_SMALL",
           "DOMINO_V"
         ],
-        "targetScore": 5942
+        "targetScore": 350
       }
     },
     {
@@ -38191,7 +38186,7 @@
           "T_SHAPE_L",
           "DOT"
         ],
-        "targetScore": 8726
+        "targetScore": 600
       }
     },
     {
@@ -38304,7 +38299,7 @@
           "L_SMALL_F",
           "L_SMALL_FR"
         ],
-        "targetScore": 6573
+        "targetScore": 600
       }
     },
     {
@@ -38417,7 +38412,7 @@
           "L_LARGE_R",
           "LINE_4_H"
         ],
-        "targetScore": 9454
+        "targetScore": 650
       }
     },
     {
@@ -38530,7 +38525,7 @@
           "L_SMALL_FR",
           "L_LARGE"
         ],
-        "targetScore": 5705
+        "targetScore": 800
       }
     },
     {
@@ -38643,7 +38638,7 @@
           "L_SMALL",
           "LINE_3_H"
         ],
-        "targetScore": 7376
+        "targetScore": 550
       }
     },
     {
@@ -38756,7 +38751,7 @@
           "LINE_3_H",
           "L_SMALL_F"
         ],
-        "targetScore": 9424
+        "targetScore": 400
       }
     },
     {
@@ -38869,7 +38864,7 @@
           "T_SHAPE_L",
           "L_LARGE_FR"
         ],
-        "targetScore": 8072
+        "targetScore": 450
       }
     },
     {
@@ -38982,7 +38977,7 @@
           "S_SHAPE",
           "LINE_5_V"
         ],
-        "targetScore": 9068
+        "targetScore": 550
       }
     },
     {
@@ -39095,7 +39090,7 @@
           "DOMINO_V",
           "L_SMALL"
         ],
-        "targetScore": 6220
+        "targetScore": 650
       }
     },
     {
@@ -39208,7 +39203,7 @@
           "S_SHAPE",
           "L_SMALL"
         ],
-        "targetScore": 10094
+        "targetScore": 900
       }
     },
     {
@@ -39321,7 +39316,7 @@
           "LINE_3_V",
           "LINE_3_V"
         ],
-        "targetScore": 8750
+        "targetScore": 600
       }
     },
     {
@@ -39434,7 +39429,7 @@
           "L_SMALL_FR",
           "L_LARGE_FR"
         ],
-        "targetScore": 7074
+        "targetScore": 700
       }
     },
     {
@@ -39547,7 +39542,7 @@
           "SQUARE",
           "L_LARGE"
         ],
-        "targetScore": 9781
+        "targetScore": 400
       }
     },
     {
@@ -39660,7 +39655,7 @@
           "CORNER_3X3_R",
           "L_SMALL_FR"
         ],
-        "targetScore": 8763
+        "targetScore": 600
       }
     },
     {
@@ -39773,7 +39768,7 @@
           "L_LARGE_R",
           "LINE_5_H"
         ],
-        "targetScore": 6509
+        "targetScore": 450
       }
     },
     {
@@ -39886,7 +39881,7 @@
           "DOMINO_V",
           "T_SHAPE_R"
         ],
-        "targetScore": 5688
+        "targetScore": 650
       }
     },
     {
@@ -39999,7 +39994,7 @@
           "L_LARGE",
           "L_SMALL_R"
         ],
-        "targetScore": 7865
+        "targetScore": 650
       }
     },
     {
@@ -40112,7 +40107,7 @@
           "L_SMALL_R",
           "L_SMALL"
         ],
-        "targetScore": 7564
+        "targetScore": 600
       }
     },
     {
@@ -40225,7 +40220,7 @@
           "L_SMALL_F",
           "DOMINO_H"
         ],
-        "targetScore": 5765
+        "targetScore": 500
       }
     },
     {
@@ -40338,7 +40333,7 @@
           "T_SHAPE",
           "L_SMALL_FR"
         ],
-        "targetScore": 5991
+        "targetScore": 300
       }
     },
     {
@@ -40451,7 +40446,7 @@
           "DOMINO_H",
           "DOMINO_H"
         ],
-        "targetScore": 6220
+        "targetScore": 550
       }
     },
     {
@@ -40564,7 +40559,7 @@
           "S_SHAPE",
           "T_SHAPE_R"
         ],
-        "targetScore": 7759
+        "targetScore": 350
       }
     },
     {
@@ -40677,7 +40672,7 @@
           "DOT",
           "T_SHAPE_R"
         ],
-        "targetScore": 9708
+        "targetScore": 150
       }
     },
     {
@@ -40790,7 +40785,7 @@
           "LINE_4_H",
           "CORNER_3X3_R"
         ],
-        "targetScore": 6890
+        "targetScore": 450
       }
     },
     {
@@ -40903,7 +40898,7 @@
           "LINE_4_V",
           "L_SMALL_F"
         ],
-        "targetScore": 9878
+        "targetScore": 400
       }
     },
     {
@@ -41016,7 +41011,7 @@
           "DOMINO_V",
           "L_LARGE_F"
         ],
-        "targetScore": 7139
+        "targetScore": 750
       }
     },
     {
@@ -41129,7 +41124,7 @@
           "DOMINO_V",
           "L_SMALL_F"
         ],
-        "targetScore": 7780
+        "targetScore": 200
       }
     },
     {
@@ -41242,7 +41237,7 @@
           "T_SHAPE_R",
           "L_SMALL_F"
         ],
-        "targetScore": 9089
+        "targetScore": 250
       }
     }
   ]

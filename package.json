@@ -8,6 +8,7 @@
     "start": "nuxt preview --host localhost --port 3005",
     "prod": "nuxt build && nuxt preview --host localhost --port 3005",
     "migrate": "node scripts/migrate.mjs",
+    "generate:daily": "node scripts/generate-daily.mjs",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed"

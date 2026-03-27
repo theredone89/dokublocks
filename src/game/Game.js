@@ -29,7 +29,35 @@ export class Game {
     this.clearingCells = null;
     this.animationProgress = 0;
     this.inputHandler = new InputHandler(canvas, this);
-    // If an initialState object is provided, load it; otherwise start fresh
+    this.challenge = null;
+    // Determine targetScore: prefer value inside initialState
+    const providedTarget = (initialState && typeof initialState.targetScore === 'number') ? initialState.targetScore : null;
+    if (providedTarget !== null && typeof providedTarget === 'number') {
+      this.challenge = { targetScore: providedTarget, tries: 0, won: false };
+    }
+
+    // If initialState provides an id for the challenge, attach it
+    if (initialState && typeof initialState === 'object' && initialState.id) {
+      this.challenge = Object.assign(this.challenge || {}, { id: initialState.id });
+      // If there's saved progress for this daily challenge in localStorage, restore tries/won
+      try {
+        if (typeof localStorage !== 'undefined') {
+          const dailyKey = `blocklogic-daily-${this.challenge.id}`;
+          const rawDaily = localStorage.getItem(dailyKey);
+          if (rawDaily) {
+            const parsedDaily = JSON.parse(rawDaily);
+            if (parsedDaily && parsedDaily.id && parsedDaily.id === this.challenge.id) {
+              if (typeof parsedDaily.tries === 'number') this.challenge.tries = parsedDaily.tries;
+              if (typeof parsedDaily.won !== 'undefined') this.challenge.won = !!parsedDaily.won;
+            }
+          }
+        }
+      } catch (e) {
+        /* ignore storage errors */
+      }
+    }
+
+    // If an initialState object is provided (grid/hand), load it; otherwise start fresh
     if (initialState && typeof initialState === 'object') {
       try {
         this.loadFromObject(initialState);
@@ -160,7 +188,29 @@ export class Game {
 
   saveState() {
     const state = { grid: this.grid.cells, score: this.scoreManager.currentScore || this.scoreManager.getScore(), highScore: this.scoreManager.highScore || this.scoreManager.getHighScore(), hand: this.hand.map(p => (p ? p.name : null)), isGameOver: !!this.isGameOver, timestamp: new Date().toISOString() };
-    localStorage.setItem('blocklogic-save', JSON.stringify(state));
+    // Persist main game state under the standard key
+    try {
+      localStorage.setItem('blocklogic-save', JSON.stringify(state));
+    } catch (e) {
+      /* ignore storage errors */
+    }
+
+    // Persist daily-specific progress separately when applicable
+    if (this.challenge && this.challenge.id) {
+      try {
+        const dailyKey = `blocklogic-daily-${this.challenge.id}`;
+        const dailyState = {
+          id: this.challenge.id,
+          tries: this.challenge.tries,
+          won: !!this.challenge.won,
+          acknowledged: !!this.challenge.acknowledged,
+          timestamp: new Date().toISOString()
+        };
+        localStorage.setItem(dailyKey, JSON.stringify(dailyState));
+      } catch (e) {
+        /* ignore storage errors */
+      }
+    }
   }
 
   loadState() {
@@ -200,6 +250,12 @@ export class Game {
     }
 
     this.isGameOver = !!state.isGameOver;
+
+    // If the state contains challenge info (from saved state), restore it
+    if (state.challenge && typeof state.challenge === 'object') {
+      // Merge saved challenge info with existing challenge (preserve targetScore if provided separately)
+      this.challenge = Object.assign({ tries: 0, won: false }, this.challenge || {}, state.challenge);
+    }
     this.render();
     this.updateScoreDisplay();
     return true;
@@ -242,11 +298,25 @@ export class Game {
   triggerGameOver() { this.isGameOver = true; this.scoreManager.saveHighScore(); this.showGameOverModal(); }
 
   showGameOverModal() {
-    const modal = document.getElementById('game-over-modal'); const finalScore = document.getElementById('final-score'); const highScore = document.getElementById('modal-high-score'); const submitBtn = document.getElementById('submit-score-btn');
-    if (modal && finalScore && highScore) { finalScore.textContent = this.scoreManager.getScore(); highScore.textContent = this.scoreManager.getHighScore(); this.isSubmittingScore = false; if (submitBtn) submitBtn.disabled = false; modal.classList.remove('hidden'); const usernameInput = document.getElementById('username'); if (usernameInput) usernameInput.focus(); }
+    const modal = document.getElementById('game-over-modal');
+    const finalScore = document.getElementById('final-score');
+    const highScore = document.getElementById('modal-high-score');
+    const submitBtn = document.getElementById('submit-score-btn');
+    // Only require modal and finalScore — highScore may be omitted on daily pages
+    if (modal && finalScore) {
+      finalScore.textContent = this.scoreManager.getScore();
+      if (highScore) highScore.textContent = this.scoreManager.getHighScore();
+      this.isSubmittingScore = false;
+      if (submitBtn) submitBtn.disabled = false;
+      // Prefer class toggle, but also set inline style/aria as a robust fallback
+      modal.classList.remove('hidden');
+      try { modal.style.display = 'flex'; modal.setAttribute('aria-hidden', 'false'); } catch (e) {}
+      const usernameInput = document.getElementById('username');
+      if (usernameInput) usernameInput.focus();
+    }
   }
 
-  hideGameOverModal() { const modal = document.getElementById('game-over-modal'); const submitBtn = document.getElementById('submit-score-btn'); if (modal) { modal.classList.add('hidden'); this.isSubmittingScore = false; if (submitBtn) submitBtn.disabled = false; const usernameInput = document.getElementById('username'); if (usernameInput) usernameInput.value = ''; } }
+  hideGameOverModal() { const modal = document.getElementById('game-over-modal'); const submitBtn = document.getElementById('submit-score-btn'); if (modal) { modal.classList.add('hidden'); try { modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true'); } catch (e) {} this.isSubmittingScore = false; if (submitBtn) submitBtn.disabled = false; const usernameInput = document.getElementById('username'); if (usernameInput) usernameInput.value = ''; } }
 
   showDialog(message, onClose = null) {
     const modal = document.getElementById('dialog-modal'); const messageEl = document.getElementById('dialog-message'); const okBtn = document.getElementById('dialog-ok-btn');
@@ -305,6 +375,74 @@ export class Game {
 
   updateScoreDisplay() {
     const currentScore = document.getElementById('current-score'); const highScore = document.getElementById('high-score'); if (currentScore) currentScore.textContent = this.scoreManager.getScore().toLocaleString(); if (highScore) highScore.textContent = this.scoreManager.getHighScore().toLocaleString(); try { window.dispatchEvent(new CustomEvent('blocklogic-score-update', { detail: { currentScore: this.scoreManager.getScore(), highScore: this.scoreManager.getHighScore() } })); } catch (e) {}
+    // Check challenge completion after score updates
+    try {
+      const cur = this.scoreManager.getScore();
+      if (this.challenge && typeof this.challenge.targetScore === 'number') {
+        if (cur >= this.challenge.targetScore && !this.challenge.won) {
+          this.triggerChallengeWin();
+        } else if (cur >= this.challenge.targetScore && this.challenge.won) {
+          // If already won, only auto-show modal when it hasn't been acknowledged yet
+          const modal = document.getElementById('challenge-win-modal');
+          const targetEl = document.getElementById('challenge-target');
+          const currentEl = document.getElementById('challenge-current');
+          if (targetEl) targetEl.textContent = this.challenge.targetScore;
+          if (currentEl) currentEl.textContent = cur;
+          const shouldShow = !this.challenge.acknowledged && modal && modal.classList.contains('hidden');
+          if (shouldShow) {
+            modal.classList.remove('hidden');
+            try { modal.style.display = 'flex'; modal.setAttribute('aria-hidden', 'false'); } catch (e) {}
+          }
+        }
+      }
+      // If this is a daily challenge, update daily high if exceeded
+      if (this.challenge && this.challenge.id) {
+        try {
+          const highKey = `blocklogic-daily-high-${this.challenge.id}`;
+          const stored = localStorage.getItem(highKey);
+          const storedVal = stored ? Number(stored) : 0;
+          if (cur > storedVal) {
+            localStorage.setItem(highKey, String(cur));
+            const highEl = document.getElementById('daily-high'); if (highEl) highEl.textContent = String(cur);
+          }
+        } catch (e) { /* ignore storage errors */ }
+      }
+    } catch (err) { console.warn('[Game] challenge check failed', err); }
+  }
+
+  checkChallengeWin() {
+    if (this.challenge && typeof this.challenge.targetScore === 'number' && this.scoreManager.getScore() >= this.challenge.targetScore && !this.challenge.won) {
+      this.triggerChallengeWin();
+    }
+  }
+
+  triggerChallengeWin(overrideScore = null) {
+    if (!this.challenge) return;
+    console.debug('[Game] triggerChallengeWin called', { overrideScore, challenge: this.challenge });
+    const wasWon = !!this.challenge.won;
+    this.challenge.won = true;
+    // Reset acknowledged so the modal will show until the player continues
+    this.challenge.acknowledged = false;
+    if (!wasWon) this.challenge.tries = (typeof this.challenge.tries === 'number') ? this.challenge.tries + 1 : 1;
+    try { this.saveState(); } catch (e) { /* ignore */ }
+    const modal = document.getElementById('challenge-win-modal');
+    const targetEl = document.getElementById('challenge-target');
+    const currentEl = document.getElementById('challenge-current');
+    console.debug('[Game] triggerChallengeWin DOM', { modalExists: !!modal, targetElExists: !!targetEl, currentElExists: !!currentEl, wasWon });
+    if (targetEl) targetEl.textContent = this.challenge.targetScore;
+    const displayedScore = (typeof overrideScore === 'number' && !Number.isNaN(overrideScore)) ? overrideScore : this.scoreManager.getScore();
+    console.debug('[Game] triggerChallengeWin displayedScore', displayedScore);
+    if (currentEl) currentEl.textContent = displayedScore;
+    if (modal) {
+      modal.classList.remove('hidden');
+      try { modal.style.display = 'flex'; modal.setAttribute('aria-hidden', 'false'); } catch (e) {}
+    }
+  }
+
+  continueChallenge() {
+    const modal = document.getElementById('challenge-win-modal'); if (modal) { modal.classList.add('hidden'); try { modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true'); } catch (e) {} }
+    // Mark the challenge as acknowledged so the modal won't reappear repeatedly
+    if (this.challenge) this.challenge.acknowledged = true;
   }
 }
 

@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    
     <client-only>
       <div id="offline-banner" class="offline-banner hidden">
         📡 <span id="offline-text">Checking connection...</span>
@@ -9,7 +10,7 @@
     <Header>
       <div class="header-top">
       </div>
-      <ScoreDisplay />
+      <ScoreDisplay :showDaily="true" :dailyId="selectedId" />
     </Header>
 
     <main>
@@ -23,7 +24,7 @@
   <Modal id="game-over-modal">
     <h2>Game Over!</h2>
     <p class="final-score">Score: <span id="final-score">0</span></p>
-    <p class="high-score-text">High Score: <span id="modal-high-score">0</span></p>
+    <p v-if="!isDaily" class="high-score-text">High Score: <span id="modal-high-score">0</span></p>
 
     <div class="username-input">
       <label for="username">Enter Name:</label>
@@ -54,6 +55,17 @@
       </div>
     </div>
   </Modal>
+
+  <Modal id="challenge-win-modal">
+    <div class="dialog-content">
+      <h2>Challenge Reached!</h2>
+      <p>Target: <span id="challenge-target">0</span></p>
+      <p>Your score: <span id="challenge-current">0</span></p>
+      <div class="modal-buttons">
+        <button id="challenge-continue-btn" class="game-button">Continue</button>
+      </div>
+    </div>
+  </Modal>
 </template>
 
 <script setup>
@@ -66,10 +78,28 @@ import Modal from '~/components/Modal.vue';
 import Game from '~/src/game/Game.js';
 
 const canvasRef = ref(null);
+import { computed } from 'vue';
+const selectedId = ref(null);
+const isDaily = computed(() => !!selectedId.value);
 
 const emitOnlineEvent = () => { window.dispatchEvent(new Event('app-online')); };
 
 let gameInstance = null;
+
+function normalizeGrid(grid) {
+  if (!Array.isArray(grid)) return null;
+  const size = 9;
+  const out = Array.from({ length: size }, () => Array.from({ length: size }, () => 0));
+  for (let r = 0; r < Math.min(grid.length, size); r++) {
+    const row = grid[r];
+    if (!Array.isArray(row)) continue;
+    for (let c = 0; c < Math.min(row.length, size); c++) {
+      const v = row[c];
+      out[r][c] = (typeof v === 'number' && v === 1) ? 1 : 0;
+    }
+  }
+  return out;
+}
 
 onMounted(async () => {
   window.addEventListener('online', emitOnlineEvent);
@@ -77,16 +107,68 @@ onMounted(async () => {
   // Initialize Game using ESM modules and the local canvas
   const canvas = document.getElementById('game-canvas');
   if (!canvas) return;
-
-  // Load daily initial state from API
+  // Load daily data from API, pick today's challenge (or ?c= override), pass only initState and targetScore
+  let selectedChallenge = null;
   try {
     const resp = await fetch('/api/daily');
     if (resp.ok) {
       const json = await resp.json();
-      if (json && json.success && json.data) {
-        gameInstance = new Game(canvas, json.data);
-      } else if (json && json.data) {
-        gameInstance = new Game(canvas, json.data);
+      let dailyList = null;
+
+      if (json && json.data) {
+        if (Array.isArray(json.data.daily)) {
+          dailyList = json.data.daily;
+        } else if (Array.isArray(json.data.challenges)) {
+          // backward compatibility
+          dailyList = json.data.challenges.map((c, i) => ({ id: c.id || String(i), date: c.date || null, challenge: c }));
+        }
+      }
+
+        if (dailyList && dailyList.length > 0) {
+        const params = new URLSearchParams(window.location.search);
+        const idParam = params.get('id');
+        const cParam = params.get('c');
+        let entry = null;
+
+        // Prefer explicit `id` URL parameter (matches entry.id or nested challenge.id)
+        if (idParam !== null) {
+          entry = dailyList.find(d => {
+            const entryId = d.id ?? (d.challenge && d.challenge.id);
+            return entryId !== undefined && String(entryId) === String(idParam);
+          });
+          // If `id` looks like a numeric index and no match found, allow index fallback
+          if (!entry) {
+            const idx = parseInt(idParam, 10);
+            if (!isNaN(idx) && idx >= 0 && idx < dailyList.length) entry = dailyList[idx];
+          }
+        }
+
+        // If no entry chosen yet, fall back to `c` index param or today's challenge
+        if (!entry) {
+          if (cParam !== null) {
+            const idx = parseInt(cParam, 10);
+            const safeIdx = isNaN(idx) ? 0 : Math.max(0, Math.min(idx, dailyList.length - 1));
+            entry = dailyList[safeIdx];
+          } else {
+            const today = new Date().toISOString().slice(0, 10);
+            entry = dailyList.find(d => d.date === today) || dailyList[0];
+          }
+        }
+
+        if (entry) {
+          // challenge payload may be nested under `challenge` key
+          selectedChallenge = entry.challenge || entry;
+          const initState = {
+            id: selectedChallenge.id || entry.id || null,
+            grid: normalizeGrid(selectedChallenge.grid),
+            hand: Array.isArray(selectedChallenge.hand) ? selectedChallenge.hand : null,
+            targetScore: (selectedChallenge && typeof selectedChallenge.targetScore === 'number') ? selectedChallenge.targetScore : null
+          };
+          selectedId.value = initState.id;
+          gameInstance = new Game(canvas, initState);
+        } else {
+          gameInstance = new Game(canvas);
+        }
       } else {
         gameInstance = new Game(canvas);
       }
@@ -97,11 +179,26 @@ onMounted(async () => {
     console.warn('[Daily Page] Failed to load daily data, starting default game', e);
     gameInstance = new Game(canvas);
   }
+    // no-op: high score tile is hidden via component-scoped CSS
+
+    // ScoreDisplay reads daily tries/high from localStorage when showDaily is true
+
+  // Wire challenge continue button to Game.continueChallenge (or hide modal fallback)
+  setTimeout(() => {
+    const cont = document.getElementById('challenge-continue-btn');
+    if (cont) {
+      cont.addEventListener('click', () => {
+        if (window.game && typeof window.game.continueChallenge === 'function') {
+          window.game.continueChallenge();
+        } else {
+          const m = document.getElementById('challenge-win-modal'); if (m) m.classList.add('hidden');
+        }
+      });
+    }
+  }, 1000);
 
   // Expose for compatibility
   window.game = gameInstance;
-
-  console.log('[Daily Page] Game initialized via ESM modules (daily)');
 });
 
 function openTestModal() {
