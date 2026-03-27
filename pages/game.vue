@@ -15,7 +15,6 @@
     <main>
       <div class="game-area">
         <canvas id="game-canvas"></canvas>
-        <button id="test-open-modal-btn" class="game-button" @click="openTestModal">Test Submit Score</button>
       </div>
     </main>
   </div>

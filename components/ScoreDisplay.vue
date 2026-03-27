@@ -109,8 +109,21 @@ watch(() => props.dailyId, (id) => { if (props.showDaily) readDailyValues(id); t
 </script>
 
 <style scoped>
-.score-display { display:flex; justify-content:center; gap:40px; font-size:18px; }
-.score-item { display:flex; flex-direction:column; align-items:center; min-width: 100px; }
+.score-display { display:flex; justify-content:center; gap:2px; font-size:12px; 
+    @media screen and (min-width: 768px) {
+      gap: 40px; font-size: 18px;
+    }
+}
+.score-item { display:flex; flex-direction:column; align-items:center; min-width: 70px;
+    @media screen and (min-width: 768px) {
+      min-width: 100px; 
+    }
+}
 .score-label { color:#888; font-size:14px; margin-bottom:5px; }
-.score-value { color:#4ecca3; font-size:28px; font-weight:bold; }
+.score-value { color:#4ecca3; font-size:20px; font-weight:bold; 
+
+    @media screen and (min-width: 768px) {
+      font-size: 28px;
+    }
+}
 </style>
