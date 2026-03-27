@@ -4,8 +4,8 @@
       <img src="/img/vectorink-vectorizer-result.svg" alt="BlockLogic" class="menu-logo">
 
       <nav class="menu-list">
-        <NuxtLink id="continue-btn" :to="{ path: '/game', query: { continue: '1' } }" class="menu-item">Continue</NuxtLink>
-        <NuxtLink id="new-game-btn" :to="{ path: '/game', query: { new: '1' } }" class="menu-item">New Game</NuxtLink>
+        <NuxtLink id="continue-btn" to="/game" class="menu-item">Continue</NuxtLink>
+        <NuxtLink id="new-game-btn" to="/new" class="menu-item">New Game</NuxtLink>
         <NuxtLink to="/daily" class="menu-item">Daily Challenge</NuxtLink>
         <NuxtLink to="/leaderboard" class="menu-item">Leaderboard</NuxtLink>
         <NuxtLink to="/settings" class="menu-item">Settings</NuxtLink>

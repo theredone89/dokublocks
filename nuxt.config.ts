@@ -47,8 +47,7 @@ export default defineNuxtConfig({
         { src: '/js/ScoreBackupManager.js' },
         { src: '/js/Renderer.js' },
         { src: '/js/InputHandler.js' },
-        { src: '/js/Game.js' },
-        { src: '/js/main.js' }
+        { src: '/js/Game.js' }
       ]
     }
   },

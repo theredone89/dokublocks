@@ -115,8 +115,7 @@ dokublocks/
 │   │   ├── ScoreManager.js
 │   │   ├── Renderer.js
 │   │   ├── InputHandler.js
-│   │   ├── Game.js
-│   │   └── main.js
+│   │   └── Game.js
 ├── scripts/
 │   └── migrate.mjs
 ├── nuxt.config.ts

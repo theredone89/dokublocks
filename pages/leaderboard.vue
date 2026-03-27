@@ -24,7 +24,7 @@
         </ol>
         <div class="leaderboard-actions">
           <button id="refresh-leaderboard-btn" class="game-button" @click="refresh">Refresh</button>
-          <NuxtLink :to="{ path: '/game', query: { new: '1' } }" class="game-button">New Game</NuxtLink>
+          <NuxtLink to="/new" class="game-button">New Game</NuxtLink>
         </div>
       </div>
     </main>

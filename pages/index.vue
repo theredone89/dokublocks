@@ -33,8 +33,7 @@ const assets = [
   '/js/Renderer.js',
   '/js/ScoreManager.js',
   '/js/ScoreBackupManager.js',
-  '/js/InputHandler.js',
-  '/js/main.js'
+  '/js/InputHandler.js'
 ]
 
 function preloadAsset(url) {

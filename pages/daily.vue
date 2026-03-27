@@ -71,28 +71,37 @@ const emitOnlineEvent = () => { window.dispatchEvent(new Event('app-online')); }
 
 let gameInstance = null;
 
-const route = useRoute();
-
-onMounted(() => {
+onMounted(async () => {
   window.addEventListener('online', emitOnlineEvent);
 
   // Initialize Game using ESM modules and the local canvas
   const canvas = document.getElementById('game-canvas');
   if (!canvas) return;
 
-  gameInstance = new Game(canvas);
+  // Load daily initial state from API
+  try {
+    const resp = await fetch('/api/daily');
+    if (resp.ok) {
+      const json = await resp.json();
+      if (json && json.success && json.data) {
+        gameInstance = new Game(canvas, json.data);
+      } else if (json && json.data) {
+        gameInstance = new Game(canvas, json.data);
+      } else {
+        gameInstance = new Game(canvas);
+      }
+    } else {
+      gameInstance = new Game(canvas);
+    }
+  } catch (e) {
+    console.warn('[Daily Page] Failed to load daily data, starting default game', e);
+    gameInstance = new Game(canvas);
+  }
+
   // Expose for compatibility
   window.game = gameInstance;
 
-  // Default: load saved game if available, otherwise init a new game
-  const saved = localStorage.getItem('blocklogic-save');
-  if (saved) {
-    if (typeof gameInstance.loadState === 'function') gameInstance.loadState();
-  } else {
-    if (typeof gameInstance.init === 'function') gameInstance.init();
-  }
-
-  console.log('[Game Page] Game initialized via ESM modules');
+  console.log('[Daily Page] Game initialized via ESM modules (daily)');
 });
 
 function openTestModal() {
@@ -108,7 +117,6 @@ onBeforeUnmount(() => { window.removeEventListener('online', emitOnlineEvent); i
 
 <style scoped>
 @import '/src/commons/buttons.css';
-/* Game page specific styles moved here to avoid global CSS leakage */
 .game-area {
   display: flex;
   flex-direction: column;
@@ -121,12 +129,7 @@ onBeforeUnmount(() => { window.removeEventListener('online', emitOnlineEvent); i
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  /* Prevent CLS by reserving space for the canvas */
   min-width: 360px;
   min-height: 360px;
 }
-
-/* Buttons are provided by public/css/buttons.css */
-
-/* Modal styles moved into components/Modal.vue */
 </style>
