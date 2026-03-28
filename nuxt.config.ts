@@ -65,7 +65,7 @@ export default defineNuxtConfig({
       description: 'A captivating puzzle game combining Sudoku grids with Tetris-style block placement mechanics',
       theme_color: '#1a1a2e',
       background_color: '#1a1a2e',
-      display: 'standalone',
+      display: 'fullscreen',
       orientation: 'portrait',
       start_url: '/',
       scope: '/',
