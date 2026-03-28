@@ -60,15 +60,15 @@ export default defineNuxtConfig({
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
-      name: 'BlockLogic - Blockudoku Game',
+      name: 'BlockLogic - Mind Puzzle Game',
       short_name: 'BlockLogic',
       description: 'A captivating puzzle game combining Sudoku grids with Tetris-style block placement mechanics',
       theme_color: '#1a1a2e',
       background_color: '#1a1a2e',
       display: 'fullscreen',
       orientation: 'portrait',
-      start_url: '/',
-      scope: '/',
+      start_url: 'https://deploy-preview-2--blocklogic.netlify.app/',
+      scope: 'https://deploy-preview-2--blocklogic.netlify.app/',
       icons: [
         { src: '/img/icon-72.png', sizes: '72x72', type: 'image/png' },
         { src: '/img/icon-96.png', sizes: '96x96', type: 'image/png' },
