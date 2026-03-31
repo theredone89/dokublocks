@@ -164,7 +164,7 @@ CREATE INDEX idx_score ON scores(score DESC);
 3. Configure middleware (cors, express.json)
 4. Set up static file serving: `app.use(express.static('public'))`
 5. Mount API endpoints
-6. Start server on port 3000 (or environment variable)
+6. Start server on port 3005 (or environment variable)
 7. Add logging middleware
 
 **Server Structure:**
@@ -183,7 +183,7 @@ app.get('/api/leaderboard', ...);
 app.post('/api/score', ...);
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

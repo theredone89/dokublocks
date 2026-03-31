@@ -45,6 +45,7 @@ class Game {
     this.setupResizeListener();
     this.setupSyncNotification();
     this.setupOfflineDetection();
+    this.setupContinueButton();
   }
 
   setupResizeListener() {
@@ -105,6 +106,37 @@ class Game {
     }
   }
 
+  // Continue button wiring
+  setupContinueButton() {
+    const continueBtn = document.getElementById('continue-btn');
+    const newGameBtn = document.getElementById('new-game-btn');
+
+    if (continueBtn) {
+      continueBtn.addEventListener('click', () => {
+        const loaded = this.loadState();
+        if (loaded) {
+          // Hide menu if present
+          const menu = document.querySelector('.menu-page');
+          if (menu) menu.classList.add('hidden');
+        } else {
+          // No saved state — start a new game
+          this.init();
+          const menu = document.querySelector('.menu-page');
+          if (menu) menu.classList.add('hidden');
+        }
+      });
+    }
+
+    if (newGameBtn) {
+      newGameBtn.addEventListener('click', () => {
+        // Start a fresh game and hide menu
+        this.init();
+        const menu = document.querySelector('.menu-page');
+        if (menu) menu.classList.add('hidden');
+      });
+    }
+  }
+
   init() {
     this.grid.reset();
     this.scoreManager.reset();
@@ -118,7 +150,6 @@ class Game {
   setupEventListeners() {
     const submitBtn = document.getElementById('submit-score-btn');
     const playAgainBtn = document.getElementById('play-again-btn');
-    const restartBtn = document.getElementById('restart-btn');
     const refreshBtn = document.getElementById('refresh-leaderboard-btn');
     
     if (submitBtn) {
@@ -132,58 +163,48 @@ class Game {
       });
     }
     
-    if (restartBtn) {
-      restartBtn.addEventListener('click', () => {
-        this.showConfirmDialog(
-          'Are you sure you want to restart? Your current progress will be lost.',
-          () => this.init()
-        );
-      });
-    }
+    
     
     if (refreshBtn) {
       refreshBtn.addEventListener('click', () => this.loadLeaderboard());
     }
     
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-      // Load saved theme preference
-      const savedTheme = localStorage.getItem('blocklogic-theme');
+    // Theme handling: apply saved theme and listen for changes from settings page
+    (function() {
       const themeColorMeta = document.getElementById('theme-color-meta');
       const appleStatusBar = document.getElementById('apple-status-bar');
-      
-      if (savedTheme === 'light') {
-        themeToggle.checked = true;
-        this.renderer.setTheme(true);
-        document.body.classList.add('light-theme');
-        if (themeColorMeta) {
-          themeColorMeta.setAttribute('content', '#e3f2fd');
-        }
-        if (appleStatusBar) {
-          appleStatusBar.setAttribute('content', 'default');
-        }
-      }
-      
-      themeToggle.addEventListener('change', (e) => {
-        const isLight = e.target.checked;
-        this.renderer.setTheme(isLight);
-        document.body.classList.toggle('light-theme', isLight);
-        localStorage.setItem('blocklogic-theme', isLight ? 'light' : 'dark');
-        
-        // Update theme-color meta tag for tab tinting
-        if (themeColorMeta) {
-          themeColorMeta.setAttribute('content', isLight ? '#e3f2fd' : '#1a1a2e');
-        }
-        
-        // Update Apple status bar style
-        if (appleStatusBar) {
-          appleStatusBar.setAttribute('content', isLight ? 'default' : 'black-translucent');
-        }
-        
+
+      const applyTheme = (isLight) => {
+        try { this.renderer.setTheme(!!isLight); } catch (e) {}
+        document.body.classList.toggle('light-theme', !!isLight);
+        if (themeColorMeta) themeColorMeta.setAttribute('content', isLight ? '#e3f2fd' : '#1a1a2e');
+        if (appleStatusBar) appleStatusBar.setAttribute('content', isLight ? 'default' : 'black-translucent');
         this.render();
-      });
-    }
+      };
+
+      // Apply saved theme at startup
+      const savedTheme = localStorage.getItem('blocklogic-theme');
+      applyTheme(savedTheme === 'light');
+
+      // If a toggle exists on this page, wire it up too
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.checked = (savedTheme === 'light');
+        themeToggle.addEventListener('change', (e) => {
+          const isLight = e.target.checked;
+          localStorage.setItem('blocklogic-theme', isLight ? 'light' : 'dark');
+          window.dispatchEvent(new CustomEvent('blocklogic-theme-change', { detail: { isLight } }));
+          applyTheme(isLight);
+        });
+      }
+
+      // Listen for theme change broadcasts (from settings page)
+      const themeHandler = (e) => {
+        const isLight = e && e.detail && typeof e.detail.isLight === 'boolean' ? e.detail.isLight : null;
+        if (typeof isLight === 'boolean') applyTheme(isLight);
+      };
+      window.addEventListener('blocklogic-theme-change', themeHandler);
+    }).call(this);
     
     const usernameInput = document.getElementById('username');
     if (usernameInput) {
@@ -260,7 +281,69 @@ class Game {
     this.checkGameOver();
     
     this.render();
+    // Persist state after each successful placement
+    try {
+      this.saveState();
+    } catch (e) {
+      console.warn('[Game] Failed to save state:', e);
+    }
     return true;
+  }
+
+  // Save game state to localStorage so Continue can restore it
+  saveState() {
+    const state = {
+      grid: this.grid.cells,
+      score: this.scoreManager.currentScore || this.scoreManager.getScore(),
+      highScore: this.scoreManager.highScore || this.scoreManager.getHighScore(),
+      hand: this.hand.map(p => (p ? p.name : null)),
+      isGameOver: !!this.isGameOver,
+      timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('blocklogic-save', JSON.stringify(state));
+  }
+
+  // Load saved state; returns true if loaded
+  loadState() {
+    try {
+      const raw = localStorage.getItem('blocklogic-save');
+      if (!raw) return false;
+      const state = JSON.parse(raw);
+
+      if (state.grid && Array.isArray(state.grid)) {
+        this.grid.cells = state.grid;
+      }
+
+      if (typeof state.score === 'number') {
+        this.scoreManager.currentScore = state.score;
+      }
+
+      if (typeof state.highScore === 'number') {
+        this.scoreManager.highScore = state.highScore;
+      }
+
+      if (Array.isArray(state.hand)) {
+        this.hand = state.hand.map(name => (name ? new Piece(PIECE_SHAPES[name], name) : null));
+      } else {
+        this.hand = this.pieceGenerator.generateBatch(this.grid.getFilledPercentage());
+      }
+
+      this.isGameOver = !!state.isGameOver;
+      this.render();
+      this.updateScoreDisplay();
+      return true;
+    } catch (e) {
+      console.error('[Game] Failed to load saved state:', e);
+      return false;
+    }
+  }
+
+  clearSavedState() {
+    try {
+      localStorage.removeItem('blocklogic-save');
+    } catch (e) {
+      // ignore
+    }
   }
 
   async animateClears(clears) {
@@ -490,12 +573,9 @@ class Game {
       await this.loadLeaderboard();
       
       this.showDialog(`Score submitted! Your rank: #${data.rank}`, () => {
-        // Close game over modal and show leaderboard
+        // Close game over modal and navigate to leaderboard page
         this.hideGameOverModal();
-        const leaderboard = document.getElementById('leaderboard-container');
-        if (leaderboard) {
-          leaderboard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+        try { window.location.href = '/leaderboard'; } catch (e) { console.warn('Failed to navigate to leaderboard', e); }
       });
       
     } catch (error) {
@@ -511,6 +591,7 @@ class Game {
           ` It will sync when connection is restored.`,
           () => {
             this.hideGameOverModal();
+            try { window.location.href = '/leaderboard'; } catch (e) { console.warn('Failed to navigate to leaderboard', e); }
           }
         );
       } else {
@@ -619,6 +700,16 @@ class Game {
     
     if (highScore) {
       highScore.textContent = this.scoreManager.getHighScore().toLocaleString();
+    }
+    try {
+      window.dispatchEvent(new CustomEvent('blocklogic-score-update', {
+        detail: {
+          currentScore: this.scoreManager.getScore(),
+          highScore: this.scoreManager.getHighScore()
+        }
+      }));
+    } catch (e) {
+      // ignore
     }
   }
 }

@@ -8,23 +8,43 @@ This is **BlockLogic**, a browser-based Blockudoku puzzle game that combines Sud
 
 ### Frontend
 - Use Node 25+ for development and testing
-- Vanilla JavaScript (ES6+)
+- Vanilla JavaScript (ES6+) for game logic (loaded as static scripts)
 - HTML5 Canvas API (Context 2D) for rendering
 - CSS for layout and styling
 - Class-based OOP architecture
+- PWA (Progressive Web App) with offline support via `@vite-pwa/nuxt`
 
-### Backend
-- Node.js runtime (18+ required for testing with Playwright)
-- Express.js framework
-- JSON file storage for data persistence (`db/scores.json`)
+### Backend / Framework
+- **Nuxt.js 4** as the full-stack framework (running on Nitro / H3)
+- TypeScript for all server-side code
+- **Primary database**: Netlify Neon (PostgreSQL) via `@netlify/neon`
+- **Fallback storage**: JSON file (`db/scores.json`) when no DB connection string is configured
+- Deployed on **Netlify** (`netlify.toml`)
+
+### Dev Commands
+```bash
+npm run dev    # nuxt dev --host localhost --port 3005
+npm run build  # nuxt build
+npm run start  # nuxt preview
+npm run migrate # Run SQL migrations against Neon DB
+```
 
 ## Architecture Principles
 
 ### Code Organization
-- `/public` - Frontend assets (HTML, CSS, JS)
-- `/src` - Backend logic and API endpoints
-- `/db` - Database files
-- `js/` subdirectory structure:
+- `/public` - Frontend static assets (CSS, JS game files, images, PWA icons)
+- `/pages/index.vue` - Main Nuxt page (Vue template wrapping the game UI and modals)
+- `/app.vue` - Root Nuxt app component
+- `/server/api/` - Nuxt file-based API routes (TypeScript, H3 handlers)
+  - `leaderboard.get.ts` → `GET /api/leaderboard`
+  - `score.post.ts` → `POST /api/score`
+- `/server/utils/` - Shared server utilities
+  - `db.ts` - Neon PostgreSQL client and `ensureScoresTable()`
+  - `scores-file.ts` - JSON file fallback helpers
+- `/server/database/migrations/` - SQL migration files
+- `/server/routes/sw.js.get.ts` - Service worker route
+- `/db` - JSON fallback storage (`scores.json`)
+- `js/` subdirectory structure (loaded as plain scripts):
   - `Grid.js` - Grid state management
   - `Pieces.js` - Shape definitions and piece generation
   - `ScoreManager.js` - Scoring logic
@@ -108,8 +128,22 @@ drawHand(pieces)      // Renders available pieces below grid
 
 ## Data Storage
 
-Scores are persisted in `/db/scores.json` with the following structure:
+The app uses a **dual-mode storage strategy**:
 
+1. **Netlify Neon (PostgreSQL)** — primary, when `NETLIFY_DATABASE_URL` or `DATABASE_URL` is set
+2. **JSON file fallback** — `db/scores.json`, used when no DB connection string is configured
+
+### PostgreSQL Schema (`server/database/migrations/0001_create_scores.sql`)
+```sql
+CREATE TABLE IF NOT EXISTS scores (
+  id BIGSERIAL PRIMARY KEY,
+  username VARCHAR(20) NOT NULL,
+  score INTEGER NOT NULL CHECK (score >= 0),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+```
+
+### JSON fallback structure
 ```json
 [
   {
@@ -121,9 +155,14 @@ Scores are persisted in `/db/scores.json` with the following structure:
 ]
 ```
 
-Helper functions in `server.js`:
-- `readScores()` - Reads and parses scores from JSON file
-- `writeScores(scores)` - Writes scores array to JSON file
+Helper functions in `server/utils/scores-file.ts`:
+- `readScoresFile()` - Reads and parses scores from JSON file
+- `writeScoresFile(scores)` - Writes scores array to JSON file
+
+Helper functions in `server/utils/db.ts`:
+- `hasNeonConfig()` - Returns true when a DB connection string is available
+- `getSql()` - Returns a tagged-template SQL client
+- `ensureScoresTable()` - Creates the scores table if it doesn't exist (called once per process)
 
 ## Testing Infrastructure
 
@@ -144,7 +183,7 @@ npm run test:headed   # Run tests in headed browser mode (visible)
 ### Testing Framework
 - Located in `/tests/e2e.spec.js`
 - Uses Playwright Test framework
-- Tests run against local server at `http://localhost:3000`
+- Tests run against local server at `http://localhost:3005`
 - Server must be running before tests execute
 
 ### Test Best Practices

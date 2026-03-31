@@ -36,7 +36,7 @@ npm install
 npm run dev
 ```
 
-The game will be available at `http://localhost:3000`
+The game will be available at `http://localhost:3005`
 
 ## Development
 
@@ -115,8 +115,7 @@ dokublocks/
 │   │   ├── ScoreManager.js
 │   │   ├── Renderer.js
 │   │   ├── InputHandler.js
-│   │   ├── Game.js
-│   │   └── main.js
+│   │   └── Game.js
 ├── scripts/
 │   └── migrate.mjs
 ├── nuxt.config.ts
@@ -142,7 +141,7 @@ Developed as a web implementation of the popular Blockudoku puzzle game concept.
 
 ## Live Demo
 
-🎮 **Server is running!** Open http://localhost:3000 in your browser to play!
+🎮 **Server is running!** Open http://localhost:3005 in your browser to play!
 
 ---
 

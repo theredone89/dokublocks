@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'theme-color', content: '#1a1a2e', id: 'theme-color-meta' },
-        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent', id: 'apple-status-bar' },
         { name: 'apple-mobile-web-app-title', content: 'BlockLogic' },
         {
@@ -47,8 +47,7 @@ export default defineNuxtConfig({
         { src: '/js/ScoreBackupManager.js' },
         { src: '/js/Renderer.js' },
         { src: '/js/InputHandler.js' },
-        { src: '/js/Game.js' },
-        { src: '/js/main.js' }
+        { src: '/js/Game.js' }
       ]
     }
   },
@@ -61,23 +60,18 @@ export default defineNuxtConfig({
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
-      name: 'BlockLogic - Blockudoku Game',
+      name: 'BlockLogic - Mind Puzzle Game',
       short_name: 'BlockLogic',
       description: 'A captivating puzzle game combining Sudoku grids with Tetris-style block placement mechanics',
       theme_color: '#1a1a2e',
       background_color: '#1a1a2e',
-      display: 'standalone',
+      display: 'fullscreen',
       orientation: 'portrait',
-      start_url: '/',
-      scope: '/',
+      start_url: 'https://blocklogic.netlify.app/',
+      scope: 'https://blocklogic.netlify.app/',
       icons: [
-        { src: '/img/icon-72.png', sizes: '72x72', type: 'image/png' },
         { src: '/img/icon-96.png', sizes: '96x96', type: 'image/png' },
-        { src: '/img/icon-128.png', sizes: '128x128', type: 'image/png' },
-        { src: '/img/icon-144.png', sizes: '144x144', type: 'image/png' },
-        { src: '/img/icon-152.png', sizes: '152x152', type: 'image/png' },
         { src: '/img/icon-192.png', sizes: '192x192', type: 'image/png' },
-        { src: '/img/icon-384.png', sizes: '384x384', type: 'image/png' },
         { src: '/img/icon-512.png', sizes: '512x512', type: 'image/png' }
       ]
     },
