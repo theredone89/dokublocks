@@ -67,16 +67,11 @@ export default defineNuxtConfig({
       background_color: '#1a1a2e',
       display: 'fullscreen',
       orientation: 'portrait',
-      start_url: 'https://deploy-preview-2--blocklogic.netlify.app/',
-      scope: 'https://deploy-preview-2--blocklogic.netlify.app/',
+      start_url: 'https://blocklogic.netlify.app/',
+      scope: 'https://blocklogic.netlify.app/',
       icons: [
-        { src: '/img/icon-72.png', sizes: '72x72', type: 'image/png' },
         { src: '/img/icon-96.png', sizes: '96x96', type: 'image/png' },
-        { src: '/img/icon-128.png', sizes: '128x128', type: 'image/png' },
-        { src: '/img/icon-144.png', sizes: '144x144', type: 'image/png' },
-        { src: '/img/icon-152.png', sizes: '152x152', type: 'image/png' },
         { src: '/img/icon-192.png', sizes: '192x192', type: 'image/png' },
-        { src: '/img/icon-384.png', sizes: '384x384', type: 'image/png' },
         { src: '/img/icon-512.png', sizes: '512x512', type: 'image/png' }
       ]
     },
